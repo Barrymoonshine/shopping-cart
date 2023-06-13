@@ -12,34 +12,15 @@ const App = () => {
       <nav>
         <ul>
           <li>
-            <NavLink
-              className={({ isActive }) => {
-                return isActive ? 'active-nav' : '';
-              }}
-              to='./components/Home/Home'
-            >
-              Home
-            </NavLink>
+            <NavLink to='./components/Home/Home'>Home</NavLink>
           </li>
           <li>
-            <NavLink
-              className={({ isActive }) => {
-                return isActive ? 'active-nav' : '';
-              }}
-              to='./components/ProductsContainer/ProductsContainer'
-            >
+            <NavLink to='./components/ProductsContainer/ProductsContainer'>
               Products
             </NavLink>
           </li>
           <li>
-            <NavLink
-              className={({ isActive }) => {
-                return isActive ? 'active-nav' : '';
-              }}
-              to='./components/Cart/Cart'
-            >
-              Cart
-            </NavLink>
+            <NavLink to='./components/Cart/Cart'>Cart</NavLink>
           </li>
         </ul>
       </nav>

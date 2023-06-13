@@ -61,6 +61,22 @@ const ProductsContainer = () => {
     setProductState(updatedArray);
   };
 
+  const getMinValue = (productQuantity) => {
+    return productQuantity === 0 ? 0 : productQuantity - 1;
+  };
+
+  const decrementQuantity = (productName) => {
+    console.log('incrementQuantity called');
+    const updatedArray = products.map((product) => {
+      if (product.productName === productName) {
+        const newQuantity = getMinValue(product.quantity);
+        return { ...product, quantity: newQuantity };
+      }
+      return product;
+    });
+    setProductState(updatedArray);
+  };
+
   return (
     <>
       <h1>Products</h1>
@@ -72,6 +88,7 @@ const ProductsContainer = () => {
             price={product.price}
             quantity={product.quantity}
             incrementQuantity={incrementQuantity}
+            decrementQuantity={decrementQuantity}
           />
         ))}
       </div>

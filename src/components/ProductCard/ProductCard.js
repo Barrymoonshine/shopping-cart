@@ -5,11 +5,11 @@ const ProductCard = (props) => {
     <div className='product-card'>
       <div className='product-title'>{props.name}</div>
       <div className='product-image'>Image-TBC</div>
-      {props.productPrice}
+      <div className='product-price'>{props.price}</div>
       <button>Add to cart</button>
-      <button>-</button>
+      <button onClick={() => props.updateQuantity('-', props.name)}>-</button>
       <div className='product-quantity'>{props.quantity}</div>
-      <button onClick={() => props.incrementQuantity(props.name)}>+</button>
+      <button onClick={() => props.updateQuantity('+', props.name)}>+</button>
     </div>
   );
 };

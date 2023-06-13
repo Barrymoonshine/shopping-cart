@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import { NavLink, Route, Routes } from 'react-router-dom';
 import Home from './components/Home/Home';
 import ProductsContainer from './components/ProductsContainer/ProductsContainer';
 import Cart from './components/Cart/Cart';
@@ -12,15 +12,34 @@ const App = () => {
       <nav>
         <ul>
           <li>
-            <Link to='./components/Home/Home'>Home</Link>
+            <NavLink
+              className={({ isActive }) => {
+                return isActive ? 'active-nav' : '';
+              }}
+              to='./components/Home/Home'
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            <Link to='./components/ProductsContainer/ProductsContainer'>
+            <NavLink
+              className={({ isActive }) => {
+                return isActive ? 'active-nav' : '';
+              }}
+              to='./components/ProductsContainer/ProductsContainer'
+            >
               Products
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to='./components/Cart/Cart'>Cart</Link>
+            <NavLink
+              className={({ isActive }) => {
+                return isActive ? 'active-nav' : '';
+              }}
+              to='./components/Cart/Cart'
+            >
+              Cart
+            </NavLink>
           </li>
         </ul>
       </nav>

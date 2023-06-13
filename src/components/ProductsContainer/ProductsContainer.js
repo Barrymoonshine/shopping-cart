@@ -59,8 +59,6 @@ const ProductsContainer = () => {
   };
 
   const updateQuantity = (operand, productName) => {
-    console.log(`operand ${operand}`);
-    console.log(`productName ${productName}`);
     const updatedArray = products.map((product) => {
       if (product.productName === productName) {
         const newQuantity = getNewValue(operand, product.quantity);

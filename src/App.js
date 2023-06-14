@@ -30,7 +30,7 @@ const App = () => {
     <>
       <div className='header'>
         <div className='left-header'>
-          <div className='shop-title'>The Smelly Cheese Co</div>
+          <div className='shop-title'>The Smelly Cheese Co.</div>
         </div>
         <nav>
           <ul className='right-nav'>

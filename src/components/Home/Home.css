@@ -1,0 +1,38 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: auto;
+  padding: 20px;
+  height: 71vh;
+}
+
+.home-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  max-width: 1050px;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+h3 {
+  font-size: 30px;
+}
+
+.home-description {
+  font-size: 20px;
+}
+
+.cheese-making-img {
+  width: 500px;
+  height: 500px;
+  border: 1px solid #1f2937;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px #d1d5db;
+}

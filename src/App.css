@@ -1,10 +1,21 @@
 body {
+  margin: 0px;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  max-width: 100vw;
-  margin: 0px;
-  padding: 20px;
+  height: 100vh;
+  width: 100%;
+  font-family: 'Montserrat', sans-serif;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 1) 36%,
+    rgba(233, 221, 174, 1) 91%,
+    rgba(2, 0, 36, 1) 234%,
+    rgba(16, 67, 109, 1) 34234%
+  );
+  background-size: cover;
+  position: relative;
+  color: #111827;
 }
 
 .active {
@@ -19,12 +30,16 @@ ul {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  background-color: #f9fafb;
+  padding: 20px;
+  border-bottom: 1px solid #111827;
 }
 
 .shop-title {
   font-family: 'Dancing Script', cursive;
   font-size: 40px;
-  padding-top: 10px;
+  font-weight: 200;
 }
 
 .right-nav {

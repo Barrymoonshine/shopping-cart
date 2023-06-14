@@ -11,7 +11,13 @@ const App = () => {
   const [cart, setCart] = useState([]);
 
   const addToCart = (productNameInput, quantityInput, priceInput) => {
-    const cost = quantityInput * priceInput;
+    const priceInteger = parseInt(priceInput.slice(1));
+    const cost = quantityInput * priceInteger;
+    console.log(
+      `quantityInput is string?: ${
+        typeof quantityInput === 'string'
+      } priceInteger is string?:${typeof priceInteger === 'string'}`
+    );
     const newProduct = {
       productName: productNameInput,
       quantity: quantityInput,

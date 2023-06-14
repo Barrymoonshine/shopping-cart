@@ -6,7 +6,7 @@ const Cart = (props) => {
           <div>{item.productName}</div>
           <div>{item.quantity}</div>
           <div>{item.price}</div>
-          <div>Total cost = {item.totalCost}</div>
+          <div>Total cost = £{item.totalCost}</div>
         </div>
       ))}
     </>

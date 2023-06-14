@@ -70,7 +70,6 @@ const ProductsContainer = (props) => {
   };
 
   const addToParentCart = (productName, quantity, price) => {
-    console.log('addToParentCart called');
     props.addToCart(productName, quantity, price);
   };
 

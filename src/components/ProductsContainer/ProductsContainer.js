@@ -2,7 +2,7 @@ import './ProductsContainer.css';
 import React, { useState } from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 
-const ProductsContainer = () => {
+const ProductsContainer = (props) => {
   const [products, setProductState] = useState([
     {
       productName: 'Product One',
@@ -69,6 +69,11 @@ const ProductsContainer = () => {
     setProductState(updatedArray);
   };
 
+  const addToParentCart = (productName, quantity, price) => {
+    console.log('addToParentCart called');
+    props.addToCart(productName, quantity, price);
+  };
+
   return (
     <>
       <h1>Products</h1>
@@ -80,6 +85,7 @@ const ProductsContainer = () => {
             price={product.price}
             quantity={product.quantity}
             updateQuantity={updateQuantity}
+            addToParentCart={addToParentCart}
           />
         ))}
       </div>

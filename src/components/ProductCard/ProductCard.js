@@ -4,11 +4,18 @@ const ProductCard = (props) => {
   return (
     <div className='product-card'>
       <div className='product-title'>{props.name}</div>
-      <div className='product-image'>Image-TBC</div>
+      <div className='product-image'>
+        <img src={props.imgSrc} className='product-imgs' alt='Cheeses' />
+      </div>
       <div className='product-price'>{props.price}</div>
       <button
         onClick={() =>
-          props.addToParentCart(props.name, props.quantity, props.price)
+          props.addToParentCart(
+            props.name,
+            props.quantity,
+            props.price,
+            props.imgSrc
+          )
         }
       >
         Add to cart

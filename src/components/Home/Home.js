@@ -6,14 +6,13 @@ const Home = () => {
   return (
     <div className='home-container'>
       <div className='home-details'>
-        <div className='right-home-container'>
+        <div className='left-home-container'>
           <h1>Artisanal cheese.</h1>
-          <h3>Purveyors of the finest fromage. </h3>
-          <p className='home-description'>
+          <div className='home-description'>
             If you like your cheese pungent, moldy and gooey - we’ve got you
             covered! Browse our selection of hand-crafted cheeses to find the
             cheese that’s right for you.
-          </p>
+          </div>
           <Link to='components/ProductsContainer/ProductsContainer'>
             <button className='explore-button'>Explore</button>
           </Link>

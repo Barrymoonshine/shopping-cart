@@ -1,62 +1,79 @@
 import './ProductsContainer.css';
 import React, { useState } from 'react';
 import ProductCard from '../ProductCard/ProductCard';
+import brieImg from '../../images/brie.jpg';
+import camembertImg from '../../images/camembert.jpg';
+import gorgonzolaImg from '../../images/gorgonzola.jpg';
+import langresImg from '../../images/langres.jpg';
+import parmesanImg from '../../images/parmesan.jpg';
+import roquefortImg from '../../images/roquefort.jpg';
+import stiltonImg from '../../images/stilton.jpg';
+import stinkingBishopImg from '../../images/stinking-bishop.jpg';
+import taleggioImg from '../../images/taleggio.jpg';
 
 const ProductsContainer = (props) => {
   const [products, setProductState] = useState([
     {
-      productName: 'Product One',
-      price: '£10',
+      productName: 'Brie',
+      imgSrc: brieImg,
+      price: '£2.80',
       quantity: 0,
     },
     {
-      productName: 'Product Two',
-      price: '£15.77',
+      productName: 'Camembert',
+      imgSrc: camembertImg,
+      price: '£2.40',
       quantity: 0,
     },
     {
-      productName: 'Product Three',
-      price: '£5.23',
+      productName: 'Gorgonloza',
+      imgSrc: gorgonzolaImg,
+      price: '£3.40',
       quantity: 0,
     },
     {
-      productName: 'Product Four',
-      price: '£32.14',
+      productName: 'Langres',
+      imgSrc: langresImg,
+      price: '£7.50',
       quantity: 0,
     },
     {
-      productName: 'Product Five',
-      price: '£0.14',
+      productName: 'Parmesan',
+      imgSrc: parmesanImg,
+      price: '£4.75',
       quantity: 0,
     },
     {
-      productName: 'Product Six',
+      productName: 'Roquefort',
+      imgSrc: roquefortImg,
       price: '£3.20',
       quantity: 0,
     },
     {
-      productName: 'Product Seven',
-      price: '£7.00',
-    },
-    {
-      productName: 'Product Eight',
-      price: '£42.10',
+      productName: 'Stilton',
+      imgSrc: stiltonImg,
+      price: '£3.70',
       quantity: 0,
     },
     {
-      productName: 'Product Nine',
-      price: '£11.11',
+      productName: 'Stinking Bishop',
+      imgSrc: stinkingBishopImg,
+      price: '£5.40',
+      quantity: 0,
+    },
+    {
+      productName: 'Taleggio',
+      imgSrc: taleggioImg,
+      price: '£6.30',
       quantity: 0,
     },
   ]);
 
-  const getMinValue = (productQuantity) => {
-    return productQuantity === 0 ? 0 : productQuantity - 1;
-  };
+  const getMinValue = (productQuantity) =>
+    productQuantity === 0 ? 0 : productQuantity - 1;
 
-  const getNewValue = (operand, quantity) => {
-    return operand === '+' ? quantity + 1 : getMinValue(quantity);
-  };
+  const getNewValue = (operand, quantity) =>
+    operand === '+' ? quantity + 1 : getMinValue(quantity);
 
   const updateQuantity = (operand, productName) => {
     const updatedArray = products.map((product) => {
@@ -69,7 +86,8 @@ const ProductsContainer = (props) => {
     setProductState(updatedArray);
   };
 
-  const addToParentCart = (productName, quantity, price) => {
+  const addToParentCart = (productName, quantity, price, img) => {
+    console.log(img);
     props.addToCart(productName, quantity, price);
   };
 
@@ -83,6 +101,7 @@ const ProductsContainer = (props) => {
             name={product.productName}
             price={product.price}
             quantity={product.quantity}
+            imgSrc={product.imgSrc}
             updateQuantity={updateQuantity}
             addToParentCart={addToParentCart}
           />

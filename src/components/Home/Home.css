@@ -20,20 +20,13 @@
 h1 {
   font-size: 70px;
   color: #807c7a;
-}
-
-h3 {
-  font-size: 30px;
+  margin-bottom: 25px;
 }
 
 .home-description {
   font-size: 20px;
   color: #450a0a;
-  padding-bottom: 20px;
-}
-
-.right-home-container {
-  justify-self: flex-start;
+  margin-bottom: 25px;
 }
 
 .cheese-making-img {

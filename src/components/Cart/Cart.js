@@ -13,13 +13,26 @@ const Cart = (props) => {
       {displayModel && (
         <div className='cart-modal'>
           <div className='cart-content'>
-            <button onClick={hideModal}>Close cart</button>
-            {props.cart.map((item) => (
-              <div key={item.productName}>
-                <div>{item.productName}</div>
-                <div>{item.quantity}</div>
-                <div>{item.price}</div>
-                <div>Total cost = £{item.totalCost}</div>
+            <div className='cart-first-line'>
+              ITEMS IN YOUR CART
+              <button onClick={hideModal}>&#10005;</button>
+            </div>
+            {props.cart.map((product) => (
+              <div className='product-summary' key={product.productName}>
+                <div className='product-img'>
+                  <img
+                    src={product.productImg}
+                    className='product-imgs'
+                    alt='Cheeses'
+                    style={{ width: '150px', height: '150px' }}
+                  />
+                </div>
+                <div className='product-name'>{product.productName}</div>
+                <div className='product-quantity'>
+                  Quantity: {product.quantity}
+                </div>
+                <div className='product-price'>Price: {product.price}</div>
+                <div className='product-cost'>Total: £{product.totalCost}</div>
               </div>
             ))}
           </div>

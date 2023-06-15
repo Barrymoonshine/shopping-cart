@@ -93,9 +93,9 @@ const ProductsContainer = (props) => {
     setProductState(updatedArray);
   };
 
-  const addToParentCart = (productName, quantity, price, img) => {
-    console.log(img);
-    props.addToCart(productName, quantity, price);
+  const addToParentCart = (productName, quantity, price, imgSrc) => {
+    console.log(imgSrc);
+    props.addToCart(productName, quantity, price, imgSrc);
   };
 
   return (

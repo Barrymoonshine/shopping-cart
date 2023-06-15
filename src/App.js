@@ -15,7 +15,8 @@ const App = () => {
   const [cart, setCart] = useState([]);
   const [isCartVisible, setCartVisibility] = useState(false);
 
-  const addToCart = (productNameInput, quantityInput, priceInput) => {
+  const addToCart = (productNameInput, quantityInput, priceInput, imgSrc) => {
+    console.log(imgSrc);
     const priceInteger = parseInt(priceInput.slice(1));
     const cost = quantityInput * priceInteger;
     const newProduct = {
@@ -23,6 +24,7 @@ const App = () => {
       quantity: quantityInput,
       price: priceInput,
       totalCost: cost,
+      productImg: imgSrc,
     };
     const newCart = [...cart, newProduct];
     setCart(newCart);

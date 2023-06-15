@@ -10,6 +10,7 @@ import roquefortImg from '../../images/roquefort.jpg';
 import stiltonImg from '../../images/stilton.jpg';
 import stinkingBishopImg from '../../images/stinking-bishop.jpg';
 import taleggioImg from '../../images/taleggio.jpg';
+import morbierImg from '../../images/morbier.jpg';
 
 const ProductsContainer = (props) => {
   const [products, setProductState] = useState([
@@ -67,6 +68,12 @@ const ProductsContainer = (props) => {
       price: '£6.30',
       quantity: 0,
     },
+    {
+      productName: 'Morbier',
+      imgSrc: morbierImg,
+      price: '£7.15',
+      quantity: 0,
+    },
   ]);
 
   const getMinValue = (productQuantity) =>
@@ -93,7 +100,7 @@ const ProductsContainer = (props) => {
 
   return (
     <>
-      <h1>Products</h1>
+      <p className='products-title'>EXPLORE STINKY CHEESE</p>
       <div className='products-container'>
         {products.map((product) => (
           <ProductCard

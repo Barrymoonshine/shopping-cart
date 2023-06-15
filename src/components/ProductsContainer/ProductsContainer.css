@@ -6,3 +6,9 @@
   align-items: center;
   gap: 20px;
 }
+
+.products-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+}

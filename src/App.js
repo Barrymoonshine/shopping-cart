@@ -13,6 +13,7 @@ import cartIcon from './images/cart-icon.png';
 
 const App = () => {
   const [cart, setCart] = useState([]);
+  const [isCartVisible, setCartVisibility] = useState(false);
 
   const addToCart = (productNameInput, quantityInput, priceInput) => {
     const priceInteger = parseInt(priceInput.slice(1));
@@ -25,6 +26,10 @@ const App = () => {
     };
     const newCart = [...cart, newProduct];
     setCart(newCart);
+  };
+
+  const toggleCartVisibility = () => {
+    setCartVisibility((prevState) => (prevState = !prevState));
   };
 
   return (
@@ -52,23 +57,23 @@ const App = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to='./components/Cart/Cart'>
-                <div className='nav-links'>
+              <div className='nav-links'>
+                <button className='cart-button' onClick={toggleCartVisibility}>
                   <img className='nav-icons' src={cartIcon} alt='Cart' />
                   Cart
-                </div>
-              </NavLink>
+                </button>
+              </div>
             </li>
           </ul>
         </nav>
       </div>
+      {isCartVisible && <Cart cart={cart} />}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route
           path='/components/ProductsContainer/ProductsContainer'
           element={<ProductsContainer addToCart={addToCart} />}
         />
-        <Route path='/components/Cart/Cart' element={<Cart cart={cart} />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />

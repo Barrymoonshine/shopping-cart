@@ -100,7 +100,7 @@ const ProductsContainer = (props) => {
 
   return (
     <>
-      <p className='products-title'>EXPLORE STINKY CHEESE</p>
+      <p className='products-title'>EXPLORE SMELLY CHEESE</p>
       <div className='products-container'>
         {products.map((product) => (
           <ProductCard

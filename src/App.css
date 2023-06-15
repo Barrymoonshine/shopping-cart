@@ -11,7 +11,7 @@ body {
 }
 
 .active {
-  color: red;
+  color: #fca5a5;
 }
 
 ul {
@@ -50,4 +50,17 @@ ul {
   width: 30px;
   height: 30px;
   padding-bottom: 10px;
+}
+
+.cart-button {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  vertical-align: middle;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0 !important;
 }

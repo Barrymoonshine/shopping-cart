@@ -10,14 +10,22 @@ import { useState } from 'react';
 import homeIcon from './images/home-icon.png';
 import cheeseIcon from './images/cheese-icon.png';
 import cartIcon from './images/cart-icon.png';
+import uniqid from 'uniqid';
 
 const App = () => {
   const [cart, setCart] = useState([]);
   const [isCartVisible, setCartVisibility] = useState(false);
 
+  const getRoundedInt = (num) => num.toFixed(2);
+
+  const getInt = (price) => {
+    const int = parseFloat(price.slice(1));
+    const int2Dp = getRoundedInt(int);
+    return int2Dp;
+  };
+
   const addToCart = (productNameInput, quantityInput, priceInput, imgSrc) => {
-    console.log(imgSrc);
-    const priceInteger = parseInt(priceInput.slice(1));
+    const priceInteger = getInt(priceInput);
     const cost = quantityInput * priceInteger;
     const newProduct = {
       productName: productNameInput,
@@ -25,6 +33,7 @@ const App = () => {
       price: priceInput,
       totalCost: cost,
       productImg: imgSrc,
+      id: uniqid(),
     };
     const newCart = [...cart, newProduct];
     setCart(newCart);
@@ -32,6 +41,26 @@ const App = () => {
 
   const toggleCartVisibility = () => {
     setCartVisibility((prevState) => (prevState = !prevState));
+  };
+
+  const getMinValue = (productQuantity) =>
+    productQuantity === 0 ? 0 : productQuantity - 1;
+
+  const getNewValue = (operand, quantity) =>
+    operand === '+' ? quantity + 1 : getMinValue(quantity);
+
+  const updateCartQuantity = (operand, id, productPrice) => {
+    const updatedArray = cart.map((product) => {
+      if (product.id === id) {
+        const newQuantity = getNewValue(operand, product.quantity);
+        const price = getInt(productPrice);
+        const cost = newQuantity * price;
+        const newCostInt = getRoundedInt(cost);
+        return { ...product, quantity: newQuantity, totalCost: newCostInt };
+      }
+      return product;
+    });
+    setCart(updatedArray);
   };
 
   return (
@@ -69,7 +98,9 @@ const App = () => {
           </ul>
         </nav>
       </div>
-      {isCartVisible && <Cart cart={cart} />}
+      {isCartVisible && (
+        <Cart cart={cart} updateCartQuantity={updateCartQuantity} />
+      )}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route

@@ -18,7 +18,7 @@ const Cart = (props) => {
               <button onClick={hideModal}>&#10005;</button>
             </div>
             {props.cart.map((product) => (
-              <div className='product-summary' key={product.productName}>
+              <div className='product-summary' key={product.id}>
                 <div className='product-img'>
                   <img
                     src={product.productImg}
@@ -29,9 +29,25 @@ const Cart = (props) => {
                 </div>
                 <div className='product-name'>{product.productName}</div>
                 <div className='product-quantity'>
-                  Quantity: {product.quantity}
+                  <button
+                    className='quantity-buttons'
+                    onClick={() =>
+                      props.updateCartQuantity('+', product.id, product.price)
+                    }
+                  >
+                    +
+                  </button>
+                  {product.quantity}
+                  <button
+                    className='quantity-buttons'
+                    onClick={() =>
+                      props.updateCartQuantity('-', product.id, product.price)
+                    }
+                  >
+                    -
+                  </button>
                 </div>
-                <div className='product-price'>Price: {product.price}</div>
+                <div className='product-price'>{product.price}</div>
                 <div className='product-cost'>Total: £{product.totalCost}</div>
               </div>
             ))}

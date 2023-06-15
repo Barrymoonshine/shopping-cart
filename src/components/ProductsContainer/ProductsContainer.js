@@ -94,7 +94,6 @@ const ProductsContainer = (props) => {
   };
 
   const addToParentCart = (productName, quantity, price, imgSrc) => {
-    console.log(imgSrc);
     props.addToCart(productName, quantity, price, imgSrc);
   };
 

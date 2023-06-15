@@ -5,15 +5,7 @@ body {
   height: 100vh;
   width: 100%;
   font-family: 'Montserrat', sans-serif;
-  background: rgb(255, 255, 255);
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 1) 36%,
-    rgba(233, 221, 174, 1) 91%,
-    rgba(2, 0, 36, 1) 234%,
-    rgba(16, 67, 109, 1) 34234%
-  );
-  background-size: cover;
+  background-image: linear-gradient(to right, #f8f6f3 0%, #f7fcb7 100%);
   position: relative;
   color: #111827;
 }
@@ -39,7 +31,7 @@ ul {
 .shop-title {
   font-family: 'Dancing Script', cursive;
   font-size: 40px;
-  font-weight: 200;
+  font-weight: bold;
 }
 
 .right-nav {

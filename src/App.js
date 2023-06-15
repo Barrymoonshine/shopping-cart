@@ -5,6 +5,7 @@ import Home from './components/Home/Home';
 import ProductsContainer from './components/ProductsContainer/ProductsContainer';
 import Cart from './components/Cart/Cart';
 import NotFound from './components/NotFound/NotFound';
+import Footer from './components/Footer/Footer';
 import { useState } from 'react';
 import homeIcon from './images/home-icon.png';
 import cheeseIcon from './images/cheese-icon.png';
@@ -70,6 +71,7 @@ const App = () => {
         <Route path='/components/Cart/Cart' element={<Cart cart={cart} />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
+      <Footer />
     </>
   );
 };

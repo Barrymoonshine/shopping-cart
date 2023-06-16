@@ -8,7 +8,7 @@ const ProductCard = (props) => {
       </div>
       <div className='name-price-container'>
         <div className='product-name'>{props.name}</div>
-        <div className='product-price'>{props.price}</div>
+        <div className='product-price'>£{props.price}</div>
       </div>
       <div className='cart-details-container'>
         <div className='quantity-container'>

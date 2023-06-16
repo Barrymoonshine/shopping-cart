@@ -16,17 +16,9 @@ const App = () => {
   const [cart, setCart] = useState([]);
   const [isCartVisible, setCartVisibility] = useState(false);
 
-  const getRoundedInt = (num) => num.toFixed(2);
-
-  const getInt = (price) => {
-    const int = parseFloat(price.slice(1));
-    const int2Dp = getRoundedInt(int);
-    return int2Dp;
-  };
-
   const addToCart = (productNameInput, quantityInput, priceInput, imgSrc) => {
-    const priceInteger = getInt(priceInput);
-    const cost = quantityInput * priceInteger;
+    const priceInt = parseFloat(priceInput);
+    const cost = (quantityInput * priceInt).toFixed(2);
     const newProduct = {
       productName: productNameInput,
       quantity: quantityInput,
@@ -53,10 +45,9 @@ const App = () => {
     const updatedArray = cart.map((product) => {
       if (product.id === id) {
         const newQuantity = getNewValue(operand, product.quantity);
-        const price = getInt(productPrice);
-        const cost = newQuantity * price;
-        const newCostInt = getRoundedInt(cost);
-        return { ...product, quantity: newQuantity, totalCost: newCostInt };
+        const priceInt = parseFloat(productPrice);
+        const cost = (newQuantity * priceInt).toFixed(2);
+        return { ...product, quantity: newQuantity, totalCost: cost };
       }
       return product;
     });

@@ -47,10 +47,11 @@ const Cart = (props) => {
                     -
                   </button>
                 </div>
-                <div className='product-price'>{product.price}</div>
+                <div className='product-price'>£{product.price}</div>
                 <div className='product-cost'>Total: £{product.totalCost}</div>
               </div>
             ))}
+            <div>SUBTOTAL £</div>
           </div>
         </div>
       )}

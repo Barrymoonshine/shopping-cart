@@ -32,7 +32,12 @@ const Cart = (props) => {
                   <button
                     className='quantity-buttons'
                     onClick={() =>
-                      props.updateCartQuantity('+', product.id, product.price)
+                      props.handleCartUpdate(
+                        '+',
+                        product.id,
+                        product.price,
+                        product.quantity
+                      )
                     }
                   >
                     +
@@ -41,7 +46,12 @@ const Cart = (props) => {
                   <button
                     className='quantity-buttons'
                     onClick={() =>
-                      props.updateCartQuantity('-', product.id, product.price)
+                      props.handleCartUpdate(
+                        '-',
+                        product.id,
+                        product.price,
+                        product.quantity
+                      )
                     }
                   >
                     -

@@ -1,12 +1,12 @@
 import './App.css';
 import React from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
 import Home from './components/Home/Home';
 import ProductsContainer from './components/ProductsContainer/ProductsContainer';
 import Cart from './components/Cart/Cart';
 import NotFound from './components/NotFound/NotFound';
 import Footer from './components/Footer/Footer';
-import { useState } from 'react';
 import homeIcon from './images/home-icon.png';
 import cheeseIcon from './images/cheese-icon.png';
 import cartIcon from './images/cart-icon.png';
@@ -35,16 +35,17 @@ const App = () => {
     setCartVisibility((prevState) => (prevState = !prevState));
   };
 
-  const getMinValue = (productQuantity) =>
-    productQuantity === 0 ? 0 : productQuantity - 1;
+  const removeFromCart = (id) => {
+    const updatedArray = cart.filter((product) => product.id !== id);
+    setCart(updatedArray);
+  };
 
-  const getNewValue = (operand, quantity) =>
-    operand === '+' ? quantity + 1 : getMinValue(quantity);
+  const getNewQuantity = (operand, quantity) =>
+    operand === '+' ? quantity + 1 : quantity - 1;
 
-  const updateCartQuantity = (operand, id, productPrice) => {
+  const updateCart = (operand, id, productPrice, newQuantity) => {
     const updatedArray = cart.map((product) => {
       if (product.id === id) {
-        const newQuantity = getNewValue(operand, product.quantity);
         const priceInt = parseFloat(productPrice);
         const cost = (newQuantity * priceInt).toFixed(2);
         return { ...product, quantity: newQuantity, totalCost: cost };
@@ -52,6 +53,13 @@ const App = () => {
       return product;
     });
     setCart(updatedArray);
+  };
+
+  const handleCartUpdate = (operand, id, productPrice, quantity) => {
+    const newQuantity = getNewQuantity(operand, quantity);
+    newQuantity === 0
+      ? removeFromCart(id)
+      : updateCart(operand, id, productPrice, newQuantity);
   };
 
   return (
@@ -90,7 +98,7 @@ const App = () => {
         </nav>
       </div>
       {isCartVisible && (
-        <Cart cart={cart} updateCartQuantity={updateCartQuantity} />
+        <Cart cart={cart} handleCartUpdate={handleCartUpdate} />
       )}
       <Routes>
         <Route path='/' element={<Home />} />

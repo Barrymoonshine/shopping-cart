@@ -1,16 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Cart.css';
 
 const Cart = (props) => {
-  const [displayModel, setDisplayModal] = useState(true);
+  const [displayCart, setDisplayCart] = useState(true);
+  const [subTotal, setSubTotal] = useState(0);
 
   const hideModal = () => {
-    setDisplayModal(false);
+    setDisplayCart(false);
   };
+
+  useEffect(() => {
+    const runningSubTotal = props.cart
+      .reduce((acc, curr) => acc + parseFloat(curr.totalCost), 0)
+      .toFixed(2);
+    console.log(`props.cart ${runningSubTotal}`);
+    setSubTotal(runningSubTotal);
+  }, [props.cart]);
 
   return (
     <div>
-      {displayModel && (
+      {displayCart && (
         <div className='cart-modal'>
           <div className='cart-content'>
             <div className='cart-first-line'>
@@ -61,7 +70,7 @@ const Cart = (props) => {
                 <div className='product-cost'>Total: £{product.totalCost}</div>
               </div>
             ))}
-            <div>SUBTOTAL £</div>
+            <div>SUBTOTAL £{subTotal}</div>
           </div>
         </div>
       )}

@@ -35,15 +35,7 @@ const App = () => {
     setCartVisibility((prevState) => (prevState = !prevState));
   };
 
-  const removeFromCart = (id) => {
-    const updatedArray = cart.filter((product) => product.id !== id);
-    setCart(updatedArray);
-  };
-
-  const getNewQuantity = (operand, quantity) =>
-    operand === '+' ? quantity + 1 : quantity - 1;
-
-  const updateCart = (operand, id, productPrice, newQuantity) => {
+  const updateCart = (id, productPrice, newQuantity) => {
     const updatedArray = cart.map((product) => {
       if (product.id === id) {
         const priceInt = parseFloat(productPrice);
@@ -54,6 +46,14 @@ const App = () => {
     });
     setCart(updatedArray);
   };
+
+  const removeFromCart = (id) => {
+    const updatedArray = cart.filter((product) => product.id !== id);
+    setCart(updatedArray);
+  };
+
+  const getNewQuantity = (operand, quantity) =>
+    operand === '+' ? quantity + 1 : quantity - 1;
 
   const handleCartUpdate = (operand, id, productPrice, quantity) => {
     const newQuantity = getNewQuantity(operand, quantity);

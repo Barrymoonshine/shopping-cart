@@ -39,7 +39,7 @@ const Cart = (props) => {
                     />
                   </div>
                   <div className='product-name'>{product.productName}</div>
-                  <div className='product-quantity'>
+                  <div className='product-quantity-container'>
                     <button
                       className='quantity-buttons'
                       onClick={() =>

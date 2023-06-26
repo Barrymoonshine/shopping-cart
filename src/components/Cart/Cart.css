@@ -31,6 +31,7 @@
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #787879;
+  font-weight: bold;
 }
 
 .cart-items {
@@ -64,7 +65,7 @@
   grid-row: 1 / 1;
 }
 
-.product-quantity {
+.product-quantity-container {
   border: 1px solid #787879;
   justify-self: center;
   align-self: center;

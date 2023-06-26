@@ -23,53 +23,65 @@ const Cart = (props) => {
           <div className='cart-content'>
             <div className='cart-first-line'>
               ITEMS IN YOUR CART
-              <button onClick={hideModal}>&#10005;</button>
+              <button className='close-cart-button' onClick={hideModal}>
+                &#10005;
+              </button>
             </div>
-            {props.cart.map((product) => (
-              <div className='product-summary' key={product.id}>
-                <div className='product-img'>
-                  <img
-                    src={product.productImg}
-                    className='product-imgs'
-                    alt='Cheeses'
-                    style={{ width: '150px', height: '150px' }}
-                  />
+            <div className='cart-items'>
+              {props.cart.map((product) => (
+                <div className='product-summary' key={product.id}>
+                  <div className='product-img'>
+                    <img
+                      src={product.productImg}
+                      className='product-imgs'
+                      alt='Cheeses'
+                      style={{ width: '100px', height: '100px' }}
+                    />
+                  </div>
+                  <div className='product-name'>{product.productName}</div>
+                  <div className='product-quantity'>
+                    <button
+                      className='quantity-buttons'
+                      onClick={() =>
+                        props.handleCartUpdate(
+                          '+',
+                          product.id,
+                          product.price,
+                          product.quantity
+                        )
+                      }
+                    >
+                      +
+                    </button>
+                    {product.quantity}
+                    <button
+                      className='quantity-buttons'
+                      onClick={() =>
+                        props.handleCartUpdate(
+                          '-',
+                          product.id,
+                          product.price,
+                          product.quantity
+                        )
+                      }
+                    >
+                      -
+                    </button>
+                  </div>
+                  <div className='product-price'>£{product.price}</div>
+                  <div className='product-cost'>
+                    Total: £{product.totalCost}
+                  </div>
                 </div>
-                <div className='product-name'>{product.productName}</div>
-                <div className='product-quantity'>
-                  <button
-                    className='quantity-buttons'
-                    onClick={() =>
-                      props.handleCartUpdate(
-                        '+',
-                        product.id,
-                        product.price,
-                        product.quantity
-                      )
-                    }
-                  >
-                    +
-                  </button>
-                  {product.quantity}
-                  <button
-                    className='quantity-buttons'
-                    onClick={() =>
-                      props.handleCartUpdate(
-                        '-',
-                        product.id,
-                        product.price,
-                        product.quantity
-                      )
-                    }
-                  >
-                    -
-                  </button>
-                </div>
-                <div className='product-price'>£{product.price}</div>
-                <div className='product-cost'>Total: £{product.totalCost}</div>
+              ))}
+            </div>
+            <div className='cart-bottom'>
+              <div className='subtotal'>
+                <div>SUBTOTAL</div>
+                <div> £{subTotal}</div>
               </div>
-            ))}
-            <div>SUBTOTAL £{subTotal}</div>
+              <button className='checkout-button'>CHECKOUT</button>
+            </div>
           </div>
         </div>
       )}

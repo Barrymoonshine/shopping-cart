@@ -13,7 +13,6 @@ const Cart = (props) => {
     const runningSubTotal = props.cart
       .reduce((acc, curr) => acc + parseFloat(curr.totalCost), 0)
       .toFixed(2);
-    console.log(`props.cart ${runningSubTotal}`);
     setSubTotal(runningSubTotal);
   }, [props.cart]);
 

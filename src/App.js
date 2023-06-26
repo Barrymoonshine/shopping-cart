@@ -57,9 +57,10 @@ const App = () => {
 
   const handleCartUpdate = (operand, id, productPrice, quantity) => {
     const newQuantity = getNewQuantity(operand, quantity);
+    console.log('newQuantity', newQuantity);
     newQuantity === 0
       ? removeFromCart(id)
-      : updateCart(operand, id, productPrice, newQuantity);
+      : updateCart(id, productPrice, newQuantity);
   };
 
   return (

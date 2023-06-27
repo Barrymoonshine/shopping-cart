@@ -108,7 +108,6 @@ const ProductsContainer = (props) => {
   const { addToCart } = useCart();
 
   const addToParentCart = (productName, quantity, price, imgSrc) => {
-    console.log('addToParentCart called');
     addToCart(productName, quantity, price, imgSrc);
   };
 

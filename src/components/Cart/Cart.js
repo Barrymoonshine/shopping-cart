@@ -6,7 +6,7 @@ const Cart = () => {
   const [displayCart, setDisplayCart] = useState(true);
   const [subTotal, setSubTotal] = useState(0);
 
-  const cart = useCart().cart;
+  const { cart, handleCartUpdate } = useCart();
 
   const hideModal = () => {
     setDisplayCart(false);
@@ -43,9 +43,33 @@ const Cart = () => {
                   </div>
                   <div className='product-name'>{product.productName}</div>
                   <div className='product-quantity-container'>
-                    <button className='quantity-buttons'>+</button>
+                    <button
+                      className='quantity-buttons'
+                      onClick={() =>
+                        handleCartUpdate(
+                          '+',
+                          product.id,
+                          product.price,
+                          product.quantity
+                        )
+                      }
+                    >
+                      +
+                    </button>
                     {product.quantity}
-                    <button className='quantity-buttons'>-</button>
+                    <button
+                      className='quantity-buttons'
+                      onClick={() =>
+                        handleCartUpdate(
+                          '-',
+                          product.id,
+                          product.price,
+                          product.quantity
+                        )
+                      }
+                    >
+                      -
+                    </button>
                   </div>
                   <div className='product-price'>£{product.price}</div>
                   <div className='product-cost'>

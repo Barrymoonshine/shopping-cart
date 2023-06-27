@@ -1,4 +1,5 @@
 import uniqid from 'uniqid';
+import ACTIONS from '../utils/ACTIONS';
 
 export const initialState = {
   cart: [],
@@ -19,8 +20,7 @@ const newCartProd = (productNameInput, quantityInput, priceInput, imgSrc) => {
 
 const cartReducer = (state, action) => {
   switch (action.type) {
-    case 'ADD_TO_CART':
-      console.log('cartReducer addToCart called');
+    case ACTIONS.ADD_TO_CART:
       return {
         ...state.cart,
         cart: [
@@ -33,7 +33,7 @@ const cartReducer = (state, action) => {
           ),
         ],
       };
-    case 'UPDATE_CART':
+    case ACTIONS.UPDATE_CART:
       const updatedArray = state.cart.map((product) => {
         if (product.id === action.payload.id) {
           const cost = (
@@ -51,7 +51,7 @@ const cartReducer = (state, action) => {
         ...state.cart,
         cart: updatedArray,
       };
-    case 'REMOVE_FROM_CART':
+    case ACTIONS.REMOVE_FROM_CART:
       return {
         ...state.cart,
         cart: state.cart.filter((product) => product.id !== action.payload.id),

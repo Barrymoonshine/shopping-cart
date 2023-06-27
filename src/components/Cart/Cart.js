@@ -10,7 +10,6 @@ const Cart = (props) => {
   };
 
   useEffect(() => {
-    console.log('props.cart:', props.cart);
     const runningSubTotal = props.cart
       .reduce((acc, curr) => acc + parseFloat(curr.totalCost), 0)
       .toFixed(2);

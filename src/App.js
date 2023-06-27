@@ -47,7 +47,6 @@ const reducer = (state, action) => {
         ],
       };
     case ACTIONS.UPDATE_CART:
-      console.log('update cart called ');
       const updatedArray = state.cart.map((product) => {
         if (product.id === action.payload.id) {
           const cost = (
@@ -68,9 +67,7 @@ const reducer = (state, action) => {
     case ACTIONS.REMOVE_FROM_CART:
       return {
         ...state.cart,
-        cart: [
-          state.cart.filter((product) => product.id !== action.payload.id),
-        ],
+        cart: state.cart.filter((product) => product.id !== action.payload.id),
       };
     default:
       return state;

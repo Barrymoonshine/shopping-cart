@@ -11,6 +11,7 @@ import homeIcon from './images/home-icon.png';
 import cheeseIcon from './images/cheese-icon.png';
 import cartIcon from './images/cart-icon.png';
 import { CartProvider } from './context/CartContext';
+import { useCart } from './context/CartContext';
 
 const App = () => {
   const [isCartVisible, setCartVisibility] = useState(false);
@@ -18,6 +19,8 @@ const App = () => {
   const toggleCartVisibility = () => {
     setCartVisibility((prevState) => (prevState = !prevState));
   };
+
+  const { totalCartItems } = useCart();
 
   return (
     <>
@@ -57,6 +60,9 @@ const App = () => {
                     <img className='nav-icons' src={cartIcon} alt='Cart' />
                     Cart
                   </button>
+                  {totalCartItems && (
+                    <div className='cart-total'>{totalCartItems}</div>
+                  )}
                 </div>
               </li>
             </ul>

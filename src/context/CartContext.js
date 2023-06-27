@@ -1,17 +1,37 @@
 import { createContext, useReducer, useContext } from 'react';
 import cartReducer, { initialState } from './cartReducer';
 import ACTIONS from '../utils/ACTIONS';
+import uniqid from 'uniqid';
 
 const CartContext = createContext(initialState);
 
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
+  const calcTotalCartItems = (newCart) => {
+    const newTotal = newCart.reduce((acc, curr) => acc + curr.quantity, false);
+    dispatch({
+      type: ACTIONS.CALC_TOTAL_CART_ITEMS,
+      payload: { newTotal },
+    });
+  };
+
   const addToCart = (productNameInput, quantityInput, priceInput, imgSrc) => {
+    const cost = (quantityInput * parseFloat(priceInput)).toFixed(2);
+    const newProduct = {
+      productName: productNameInput,
+      quantity: quantityInput,
+      price: priceInput,
+      totalCost: cost,
+      productImg: imgSrc,
+      id: uniqid(),
+    };
+    const newCart = [...state.cart, newProduct];
     dispatch({
       type: ACTIONS.ADD_TO_CART,
-      payload: { productNameInput, quantityInput, priceInput, imgSrc },
+      payload: { newCart },
     });
+    calcTotalCartItems(newCart);
   };
 
   const getNewQuantity = (operand, quantity) =>
@@ -32,6 +52,7 @@ export const CartProvider = ({ children }) => {
 
   const value = {
     cart: state.cart,
+    totalCartItems: state.totalCartItems,
     addToCart,
     handleCartUpdate,
   };

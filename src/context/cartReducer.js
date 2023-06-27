@@ -1,40 +1,23 @@
-import uniqid from 'uniqid';
 import ACTIONS from '../utils/ACTIONS';
 
 export const initialState = {
   cart: [],
-};
-
-const newCartProd = (productNameInput, quantityInput, priceInput, imgSrc) => {
-  const cost = (quantityInput * parseFloat(priceInput)).toFixed(2);
-  const newProduct = {
-    productName: productNameInput,
-    quantity: quantityInput,
-    price: priceInput,
-    totalCost: cost,
-    productImg: imgSrc,
-    id: uniqid(),
-  };
-  return newProduct;
+  totalCartItems: false,
 };
 
 const cartReducer = (state, action) => {
   switch (action.type) {
     case ACTIONS.ADD_TO_CART:
+      console.log('action.payload.newCart', action.payload.newCart);
+      console.log('state', { ...state });
+      console.log('state.cart', state.cart);
       return {
-        ...state.cart,
-        cart: [
-          ...state.cart,
-          newCartProd(
-            action.payload.productNameInput,
-            action.payload.quantityInput,
-            action.payload.priceInput,
-            action.payload.imgSrc
-          ),
-        ],
+        ...state,
+        cart: action.payload.newCart,
       };
+
     case ACTIONS.UPDATE_CART:
-      const updatedArray = state.cart.map((product) => {
+      const updatedProd = state.cart.map((product) => {
         if (product.id === action.payload.id) {
           const cost = (
             action.payload.newQuantity * parseFloat(action.payload.productPrice)
@@ -49,12 +32,17 @@ const cartReducer = (state, action) => {
       });
       return {
         ...state.cart,
-        cart: updatedArray,
+        cart: updatedProd,
       };
     case ACTIONS.REMOVE_FROM_CART:
       return {
         ...state.cart,
         cart: state.cart.filter((product) => product.id !== action.payload.id),
+      };
+    case ACTIONS.CALC_TOTAL_CART_ITEMS:
+      return {
+        ...state.totalCartItems,
+        totalCartItems: action.payload.newTotal,
       };
     default:
       return state;

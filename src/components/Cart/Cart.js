@@ -1,20 +1,23 @@
-import { useState, useEffect } from 'react';
 import './Cart.css';
+import { useState, useEffect } from 'react';
+import { useCart } from '../../context/CartContext';
 
-const Cart = (props) => {
+const Cart = () => {
   const [displayCart, setDisplayCart] = useState(true);
   const [subTotal, setSubTotal] = useState(0);
+
+  const cart = useCart().cart;
 
   const hideModal = () => {
     setDisplayCart(false);
   };
 
   useEffect(() => {
-    const runningSubTotal = props.cart
+    const runningSubTotal = cart
       .reduce((acc, curr) => acc + parseFloat(curr.totalCost), 0)
       .toFixed(2);
     setSubTotal(runningSubTotal);
-  }, [props.cart]);
+  }, [cart]);
 
   return (
     <div>
@@ -28,7 +31,7 @@ const Cart = (props) => {
               </button>
             </div>
             <div className='cart-items'>
-              {props.cart.map((product) => (
+              {cart.map((product) => (
                 <div className='product-summary' key={product.id}>
                   <div className='product-img'>
                     <img
@@ -40,33 +43,9 @@ const Cart = (props) => {
                   </div>
                   <div className='product-name'>{product.productName}</div>
                   <div className='product-quantity-container'>
-                    <button
-                      className='quantity-buttons'
-                      onClick={() =>
-                        props.handleCartUpdate(
-                          '+',
-                          product.id,
-                          product.price,
-                          product.quantity
-                        )
-                      }
-                    >
-                      +
-                    </button>
+                    <button className='quantity-buttons'>+</button>
                     {product.quantity}
-                    <button
-                      className='quantity-buttons'
-                      onClick={() =>
-                        props.handleCartUpdate(
-                          '-',
-                          product.id,
-                          product.price,
-                          product.quantity
-                        )
-                      }
-                    >
-                      -
-                    </button>
+                    <button className='quantity-buttons'>-</button>
                   </div>
                   <div className='product-price'>£{product.price}</div>
                   <div className='product-cost'>

@@ -12,6 +12,7 @@ import stinkingBishopImg from '../../images/stinking-bishop.jpg';
 import taleggioImg from '../../images/taleggio.jpg';
 import morbierImg from '../../images/morbier.jpg';
 import uniqid from 'uniqid';
+import { useCart } from '../../context/CartContext';
 
 const ProductsContainer = (props) => {
   const [products, setProductState] = useState([
@@ -104,8 +105,11 @@ const ProductsContainer = (props) => {
     setProductState(updatedArray);
   };
 
+  const { addToCart } = useCart();
+
   const addToParentCart = (productName, quantity, price, imgSrc) => {
-    props.addToCart(productName, quantity, price, imgSrc);
+    console.log('addToParentCart called');
+    addToCart(productName, quantity, price, imgSrc);
   };
 
   return (

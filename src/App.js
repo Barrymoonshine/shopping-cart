@@ -14,9 +14,11 @@ import uniqid from 'uniqid';
 
 const ACTIONS = {
   ADD_TO_CART: 'add-to-cart',
+  UPDATE_CART: 'update-cart',
+  REMOVE_FROM_CART: 'remove-from-cart',
 };
 
-const newCart = (productNameInput, quantityInput, priceInput, imgSrc) => {
+const newCartProd = (productNameInput, quantityInput, priceInput, imgSrc) => {
   const cost = (quantityInput * parseFloat(priceInput)).toFixed(2);
   const newProduct = {
     productName: productNameInput,
@@ -26,24 +28,48 @@ const newCart = (productNameInput, quantityInput, priceInput, imgSrc) => {
     productImg: imgSrc,
     id: uniqid(),
   };
-  console.log(newProduct);
   return newProduct;
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case ACTIONS.ADD_TO_CART:
-      console.log(`state.cart func `, state.cart);
       return {
         ...state.cart,
         cart: [
           ...state.cart,
-          newCart(
+          newCartProd(
             action.payload.productNameInput,
             action.payload.quantityInput,
             action.payload.priceInput,
             action.payload.imgSrc
           ),
+        ],
+      };
+    case ACTIONS.UPDATE_CART:
+      console.log('update cart called ');
+      const updatedArray = state.cart.map((product) => {
+        if (product.id === action.payload.id) {
+          const cost = (
+            action.payload.newQuantity * parseFloat(action.payload.productPrice)
+          ).toFixed(2);
+          return {
+            ...product,
+            quantity: action.payload.newQuantity,
+            totalCost: cost,
+          };
+        }
+        return product;
+      });
+      return {
+        ...state.cart,
+        cart: updatedArray,
+      };
+    case ACTIONS.REMOVE_FROM_CART:
+      return {
+        ...state.cart,
+        cart: [
+          state.cart.filter((product) => product.id !== action.payload.id),
         ],
       };
     default:
@@ -52,20 +78,17 @@ const reducer = (state, action) => {
 };
 
 const App = () => {
-  const [cart, setCart] = useState([]);
   const [isCartVisible, setCartVisibility] = useState(false);
   const [totalCartItems, setTotalCartItems] = useState(false);
   const [state, dispatch] = useReducer(reducer, { cart: [] });
 
-  console.log('state.cart main ', state.cart);
-
   useEffect(() => {
-    const runningTotalCartItems = cart.reduce(
+    const runningTotalCartItems = state.cart.reduce(
       (acc, curr) => acc + curr.quantity,
       false
     );
     setTotalCartItems(runningTotalCartItems);
-  }, [cart]);
+  }, [state.cart]);
 
   const addToCart = (productNameInput, quantityInput, priceInput, imgSrc) => {
     dispatch({
@@ -78,30 +101,20 @@ const App = () => {
     setCartVisibility((prevState) => (prevState = !prevState));
   };
 
-  const updateCart = (id, productPrice, newQuantity) => {
-    const updatedArray = cart.map((product) => {
-      if (product.id === id) {
-        const cost = (newQuantity * parseFloat(productPrice)).toFixed(2);
-        return { ...product, quantity: newQuantity, totalCost: cost };
-      }
-      return product;
-    });
-    setCart(updatedArray);
-  };
-
-  const removeFromCart = (id) => {
-    const updatedArray = cart.filter((product) => product.id !== id);
-    setCart(updatedArray);
-  };
-
   const getNewQuantity = (operand, quantity) =>
     operand === '+' ? quantity + 1 : quantity - 1;
 
   const handleCartUpdate = (operand, id, productPrice, quantity) => {
     const newQuantity = getNewQuantity(operand, quantity);
     newQuantity === 0
-      ? removeFromCart(id)
-      : updateCart(id, productPrice, newQuantity);
+      ? dispatch({
+          type: ACTIONS.REMOVE_FROM_CART,
+          payload: { id },
+        })
+      : dispatch({
+          type: ACTIONS.UPDATE_CART,
+          payload: { id, productPrice, newQuantity },
+        });
   };
 
   return (

@@ -11,6 +11,7 @@ import stiltonImg from '../../images/stilton.jpg';
 import stinkingBishopImg from '../../images/stinking-bishop.jpg';
 import taleggioImg from '../../images/taleggio.jpg';
 import morbierImg from '../../images/morbier.jpg';
+import uniqid from 'uniqid';
 
 const ProductsContainer = (props) => {
   const [products, setProductState] = useState([
@@ -19,60 +20,70 @@ const ProductsContainer = (props) => {
       imgSrc: brieImg,
       price: '2.80',
       quantity: 0,
+      id: uniqid(),
     },
     {
       productName: 'Camembert',
       imgSrc: camembertImg,
       price: '2.40',
       quantity: 0,
+      id: uniqid(),
     },
     {
       productName: 'Gorgonloza',
       imgSrc: gorgonzolaImg,
       price: '3.40',
       quantity: 0,
+      id: uniqid(),
     },
     {
       productName: 'Langres',
       imgSrc: langresImg,
       price: '7.50',
       quantity: 0,
+      id: uniqid(),
     },
     {
       productName: 'Parmesan',
       imgSrc: parmesanImg,
       price: '4.75',
       quantity: 0,
+      id: uniqid(),
     },
     {
       productName: 'Roquefort',
       imgSrc: roquefortImg,
       price: '3.20',
       quantity: 0,
+      id: uniqid(),
     },
     {
       productName: 'Stilton',
       imgSrc: stiltonImg,
       price: '3.70',
       quantity: 0,
+      id: uniqid(),
     },
     {
       productName: 'Stinking Bishop',
       imgSrc: stinkingBishopImg,
       price: '5.40',
       quantity: 0,
+      id: uniqid(),
     },
     {
       productName: 'Taleggio',
       imgSrc: taleggioImg,
       price: '6.30',
       quantity: 0,
+      id: uniqid(),
     },
     {
       productName: 'Morbier',
       imgSrc: morbierImg,
       price: '7.15',
       quantity: 0,
+      id: uniqid(),
     },
   ]);
 
@@ -103,7 +114,7 @@ const ProductsContainer = (props) => {
       <div className='products-container'>
         {products.map((product) => (
           <ProductCard
-            key={product.productName}
+            key={product.id}
             name={product.productName}
             price={product.price}
             quantity={product.quantity}

@@ -143,7 +143,7 @@ const App = () => {
         </nav>
       </div>
       {isCartVisible && (
-        <Cart cart={cart} handleCartUpdate={handleCartUpdate} />
+        <Cart cart={state.cart} handleCartUpdate={handleCartUpdate} />
       )}
       <Routes>
         <Route path='/' element={<Home />} />

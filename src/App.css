@@ -64,3 +64,16 @@ ul {
   cursor: pointer;
   padding: 0 !important;
 }
+
+.cart-total {
+  position: absolute;
+  top: 50px;
+  right: 40px;
+  z-index: 1;
+  background-color: #fca5a5;
+  width: 32px;
+  height: 25px;
+  border-radius: 20px;
+  text-align: center;
+  padding: 7px 0px 0px 0px;
+}

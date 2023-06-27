@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import Home from './components/Home/Home';
 import ProductsContainer from './components/ProductsContainer/ProductsContainer';
 import Cart from './components/Cart/Cart';
@@ -12,23 +12,66 @@ import cheeseIcon from './images/cheese-icon.png';
 import cartIcon from './images/cart-icon.png';
 import uniqid from 'uniqid';
 
+const ACTIONS = {
+  ADD_TO_CART: 'add-to-cart',
+};
+
+const newCart = (productNameInput, quantityInput, priceInput, imgSrc) => {
+  const cost = (quantityInput * parseFloat(priceInput)).toFixed(2);
+  const newProduct = {
+    productName: productNameInput,
+    quantity: quantityInput,
+    price: priceInput,
+    totalCost: cost,
+    productImg: imgSrc,
+    id: uniqid(),
+  };
+  console.log(newProduct);
+  return newProduct;
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case ACTIONS.ADD_TO_CART:
+      console.log(`state.cart func `, state.cart);
+      return {
+        ...state.cart,
+        cart: [
+          ...state.cart,
+          newCart(
+            action.payload.productNameInput,
+            action.payload.quantityInput,
+            action.payload.priceInput,
+            action.payload.imgSrc
+          ),
+        ],
+      };
+    default:
+      return state;
+  }
+};
+
 const App = () => {
   const [cart, setCart] = useState([]);
   const [isCartVisible, setCartVisibility] = useState(false);
+  const [totalCartItems, setTotalCartItems] = useState(false);
+  const [state, dispatch] = useReducer(reducer, { cart: [] });
+
+  console.log('state.cart main ', state.cart);
+
+  useEffect(() => {
+    const runningTotalCartItems = cart.reduce(
+      (acc, curr) => acc + curr.quantity,
+      false
+    );
+    setTotalCartItems(runningTotalCartItems);
+  }, [cart]);
 
   const addToCart = (productNameInput, quantityInput, priceInput, imgSrc) => {
-    const priceInt = parseFloat(priceInput);
-    const cost = (quantityInput * priceInt).toFixed(2);
-    const newProduct = {
-      productName: productNameInput,
-      quantity: quantityInput,
-      price: priceInput,
-      totalCost: cost,
-      productImg: imgSrc,
-      id: uniqid(),
-    };
-    const newCart = [...cart, newProduct];
-    setCart(newCart);
+    dispatch({
+      type: ACTIONS.ADD_TO_CART,
+      payload: { productNameInput, quantityInput, priceInput, imgSrc },
+    });
   };
 
   const toggleCartVisibility = () => {
@@ -38,8 +81,7 @@ const App = () => {
   const updateCart = (id, productPrice, newQuantity) => {
     const updatedArray = cart.map((product) => {
       if (product.id === id) {
-        const priceInt = parseFloat(productPrice);
-        const cost = (newQuantity * priceInt).toFixed(2);
+        const cost = (newQuantity * parseFloat(productPrice)).toFixed(2);
         return { ...product, quantity: newQuantity, totalCost: cost };
       }
       return product;
@@ -91,7 +133,10 @@ const App = () => {
                 <button className='cart-button' onClick={toggleCartVisibility}>
                   <img className='nav-icons' src={cartIcon} alt='Cart' />
                   Cart
-                </button>
+                </button>{' '}
+                {totalCartItems && (
+                  <div className='cart-total'>{totalCartItems}</div>
+                )}
               </div>
             </li>
           </ul>

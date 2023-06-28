@@ -1,4 +1,4 @@
-import './ProductCard.css';
+import './ProductCards.css';
 
 const ProductCard = (props) => {
   return (
@@ -14,14 +14,14 @@ const ProductCard = (props) => {
         <div className='quantity-container'>
           <button
             className='quantity-buttons'
-            onClick={() => props.updateQuantity('-', props.name)}
+            onClick={() => props.updateProdQuantity('-', props.name)}
           >
             -
           </button>
           <div className='product-quantity'>{props.quantity}</div>
           <button
             className='quantity-buttons'
-            onClick={() => props.updateQuantity('+', props.name)}
+            onClick={() => props.updateProdQuantity('+', props.name)}
           >
             +
           </button>
@@ -29,7 +29,7 @@ const ProductCard = (props) => {
         <button
           className='add-to-cart-button'
           onClick={() =>
-            props.addToParentCart(
+            props.addToCart(
               props.name,
               props.quantity,
               props.price,

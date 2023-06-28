@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import Footer from './components/Footer/Footer';
 import { CartProvider } from './context/CartContext';
-import RouteSwitch from './components/RouteSwitch/RouteSwitch';
+import RouteSwitch from './pages/RouteSwitch/RouteSwitch';
 
 const App = () => {
   return (

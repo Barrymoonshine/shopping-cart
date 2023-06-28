@@ -1,19 +1,17 @@
-import React from 'react';
 import './RouteSwitch.css';
+import React from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
-import Home from '../Home/Home';
-import ProductsContainer from '../ProductsContainer/ProductsContainer';
-import Cart from '../Cart/Cart';
-import NotFound from '../NotFound/NotFound';
+import { useCart } from '../../context/CartContext';
+import Home from '..//Home/Home';
+import Products from '../Products/Products';
+import Cart from '../../components/Cart/Cart';
+import NotFound from '../../components/NotFound/NotFound';
 import homeIcon from '../../images/home-icon.png';
 import cheeseIcon from '../../images/cheese-icon.png';
 import cartIcon from '../../images/cart-icon.png';
-import { useCart } from '../../context/CartContext';
 
 const RouteSwitch = () => {
   const { totalCartItems, toggleCartVisibility, isCartVisible } = useCart();
-
-  console.log('isCartVisible in RouteSwitch', isCartVisible);
 
   return (
     <>
@@ -32,7 +30,7 @@ const RouteSwitch = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to='./components/ProductsContainer/ProductsContainer'>
+              <NavLink to='./pages/Products/Products'>
                 <div className='nav-links'>
                   <img className='nav-icons' src={cheeseIcon} alt='Products' />
                   Products
@@ -59,10 +57,7 @@ const RouteSwitch = () => {
       {isCartVisible && <Cart />}
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route
-          path='/components/ProductsContainer/ProductsContainer'
-          element={<ProductsContainer />}
-        />
+        <Route path='pages/Products/Products' element={<Products />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </>

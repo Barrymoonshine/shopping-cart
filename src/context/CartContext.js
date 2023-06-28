@@ -95,7 +95,28 @@ export const CartProvider = ({ children }) => {
       : updateCart(id, productPrice, newQuantity);
   };
 
+  const getMinValue = (productQuantity) =>
+    productQuantity === 0 ? 0 : productQuantity - 1;
+
+  const getNewValue = (operand, quantity) =>
+    operand === '+' ? quantity + 1 : getMinValue(quantity);
+
+  const updateProdQuantity = (operand, productName) => {
+    const newProdQuantity = state.products.map((product) => {
+      if (product.productName === productName) {
+        const newQuantity = getNewValue(operand, product.quantity);
+        return { ...product, quantity: newQuantity };
+      }
+      return product;
+    });
+    dispatch({
+      type: ACTIONS.UPDATE_PROD_QUANTITY,
+      payload: { newProdQuantity },
+    });
+  };
+
   const value = {
+    products: state.products,
     cart: state.cart,
     totalCartItems: state.totalCartItems,
     totalCartCost: state.totalCartCost,
@@ -103,6 +124,7 @@ export const CartProvider = ({ children }) => {
     addToCart,
     handleCartUpdate,
     toggleCartVisibility,
+    updateProdQuantity,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

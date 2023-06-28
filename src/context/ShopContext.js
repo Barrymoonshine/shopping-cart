@@ -2,6 +2,7 @@ import { createContext, useReducer, useContext } from 'react';
 import shopReducer, { initialState } from './shopReducer';
 import ACTIONS from '../utils/ACTIONS';
 import uniqid from 'uniqid';
+import helpers from '../helpers/helpers.js';
 
 const ShopContext = createContext(initialState);
 export const useShop = () => useContext(ShopContext);
@@ -86,26 +87,17 @@ export const ShopProvider = ({ children }) => {
     calcTotalCartCost(newCart);
   };
 
-  const getNewQuantity = (operand, quantity) =>
-    operand === '+' ? quantity + 1 : quantity - 1;
-
   const handleCartUpdate = (operand, id, productPrice, quantity) => {
-    const newQuantity = getNewQuantity(operand, quantity);
+    const newQuantity = helpers.getNewQuantity(operand, quantity);
     newQuantity === 0
       ? removeFromCart(id)
       : updateCart(id, productPrice, newQuantity);
   };
 
-  const getMinValue = (productQuantity) =>
-    productQuantity === 0 ? 0 : productQuantity - 1;
-
-  const getNewValue = (operand, quantity) =>
-    operand === '+' ? quantity + 1 : getMinValue(quantity);
-
   const updateProdQuantity = (operand, productName) => {
     const newProdQuantity = state.products.map((product) => {
       if (product.productName === productName) {
-        const newQuantity = getNewValue(operand, product.quantity);
+        const newQuantity = helpers.getNewValue(operand, product.quantity);
         return { ...product, quantity: newQuantity };
       }
       return product;

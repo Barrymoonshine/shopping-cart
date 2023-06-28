@@ -3,7 +3,7 @@ import { useShop } from '../../context/ShopContext';
 import ProductCard from '../../components/ProductCards/ProductCards';
 
 const Products = () => {
-  const { products, updateProdQuantity, addToCart } = useShop();
+  const { products, updateProdQuantity, handleAddToCart } = useShop();
 
   return (
     <>
@@ -17,7 +17,7 @@ const Products = () => {
             quantity={product.quantity}
             imgSrc={product.imgSrc}
             updateProdQuantity={updateProdQuantity}
-            addToCart={addToCart}
+            handleAddToCart={handleAddToCart}
           />
         ))}
       </div>

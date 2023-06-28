@@ -1,7 +1,7 @@
 import './ProductCards.css';
 
 const ProductCard = (props) => {
-  const { name, price, quantity, imgSrc, updateProdQuantity, addToCart } =
+  const { name, price, quantity, imgSrc, updateProdQuantity, handleAddToCart } =
     props;
   return (
     <div className='product-card'>
@@ -35,7 +35,7 @@ const ProductCard = (props) => {
         <button
           className='add-to-cart-button'
           onClick={() => {
-            addToCart(name, quantity, price, imgSrc);
+            handleAddToCart(name, quantity, price, imgSrc);
           }}
         >
           Add to cart

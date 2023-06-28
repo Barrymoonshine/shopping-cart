@@ -58,6 +58,16 @@ export const ShopProvider = ({ children }) => {
     calcTotalCartCost(newCart);
   };
 
+  const handleAddToCart = (
+    productNameInput,
+    quantityInput,
+    priceInput,
+    imgSrc
+  ) => {
+    quantityInput !== 0 &&
+      addToCart(productNameInput, quantityInput, priceInput, imgSrc);
+  };
+
   const updateCart = (id, productPrice, newQuantity) => {
     const newCart = state.cart.map((product) => {
       if (product.id === id) {
@@ -115,7 +125,7 @@ export const ShopProvider = ({ children }) => {
     totalCartItems: state.totalCartItems,
     totalCartCost: state.totalCartCost,
     isCartVisible: state.isCartVisible,
-    addToCart,
+    handleAddToCart,
     handleCartUpdate,
     toggleCartVisibility,
     updateProdQuantity,

@@ -8,9 +8,6 @@ export const initialState = {
 const cartReducer = (state, action) => {
   switch (action.type) {
     case ACTIONS.ADD_TO_CART:
-      console.log('action.payload.newCart', action.payload.newCart);
-      console.log('state', { ...state });
-      console.log('state.cart', state.cart);
       return {
         ...state,
         cart: action.payload.newCart,
@@ -31,17 +28,17 @@ const cartReducer = (state, action) => {
         return product;
       });
       return {
-        ...state.cart,
+        ...state,
         cart: updatedProd,
       };
     case ACTIONS.REMOVE_FROM_CART:
       return {
-        ...state.cart,
+        ...state,
         cart: state.cart.filter((product) => product.id !== action.payload.id),
       };
     case ACTIONS.CALC_TOTAL_CART_ITEMS:
       return {
-        ...state.totalCartItems,
+        ...state,
         totalCartItems: action.payload.newTotal,
       };
     default:

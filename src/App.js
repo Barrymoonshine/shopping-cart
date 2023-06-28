@@ -22,6 +22,8 @@ const App = () => {
 
   const { totalCartItems } = useCart();
 
+  console.log('totalCartItems in App.js', { totalCartItems });
+
   return (
     <>
       <CartProvider>

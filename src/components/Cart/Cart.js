@@ -19,8 +19,6 @@ const Cart = () => {
     setSubTotal(runningSubTotal);
   }, [cart]);
 
-  console.log('cart.cart in Cart', cart.cart);
-
   return (
     <div>
       {displayCart && (

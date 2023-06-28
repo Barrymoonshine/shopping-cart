@@ -10,6 +10,7 @@ export const CartProvider = ({ children }) => {
 
   const calcTotalCartItems = (newCart) => {
     const newTotal = newCart.reduce((acc, curr) => acc + curr.quantity, false);
+    console.log('newTotal in context', newTotal);
     dispatch({
       type: ACTIONS.CALC_TOTAL_CART_ITEMS,
       payload: { newTotal },

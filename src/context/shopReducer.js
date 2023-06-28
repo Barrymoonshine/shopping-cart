@@ -90,7 +90,7 @@ export const initialState = {
   isCartVisible: false,
 };
 
-const cartReducer = (state, action) => {
+const shopReducer = (state, action) => {
   switch (action.type) {
     case ACTIONS.ADD_TO_CART:
       return {
@@ -133,4 +133,4 @@ const cartReducer = (state, action) => {
   }
 };
 
-export default cartReducer;
+export default shopReducer;

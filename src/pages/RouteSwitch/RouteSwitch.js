@@ -1,7 +1,7 @@
 import './RouteSwitch.css';
 import React from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
-import { useCart } from '../../context/CartContext';
+import { useShop } from '../../context/ShopContext';
 import Home from '..//Home/Home';
 import Products from '../Products/Products';
 import Cart from '../../components/Cart/Cart';
@@ -11,7 +11,7 @@ import cheeseIcon from '../../images/cheese-icon.png';
 import cartIcon from '../../images/cart-icon.png';
 
 const RouteSwitch = () => {
-  const { totalCartItems, toggleCartVisibility, isCartVisible } = useCart();
+  const { totalCartItems, toggleCartVisibility, isCartVisible } = useShop();
 
   return (
     <>

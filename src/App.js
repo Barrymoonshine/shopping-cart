@@ -1,16 +1,16 @@
 import './App.css';
 import React from 'react';
 import Footer from './components/Footer/Footer';
-import { CartProvider } from './context/CartContext';
+import { ShopProvider } from './context/ShopContext';
 import RouteSwitch from './pages/RouteSwitch/RouteSwitch';
 
 const App = () => {
   return (
     <>
-      <CartProvider>
+      <ShopProvider>
         <RouteSwitch />
         <Footer />
-      </CartProvider>
+      </ShopProvider>
     </>
   );
 };

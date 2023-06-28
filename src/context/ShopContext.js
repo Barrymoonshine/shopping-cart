@@ -1,12 +1,13 @@
 import { createContext, useReducer, useContext } from 'react';
-import cartReducer, { initialState } from './cartReducer';
+import shopReducer, { initialState } from './shopReducer';
 import ACTIONS from '../utils/ACTIONS';
 import uniqid from 'uniqid';
 
-const CartContext = createContext(initialState);
+const ShopContext = createContext(initialState);
+export const useShop = () => useContext(ShopContext);
 
-export const CartProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(cartReducer, initialState);
+export const ShopProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(shopReducer, initialState);
 
   const calcTotalCartCost = (newCart) => {
     const newTotalCost = newCart
@@ -127,7 +128,5 @@ export const CartProvider = ({ children }) => {
     updateProdQuantity,
   };
 
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+  return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
 };
-
-export const useCart = () => useContext(CartContext);

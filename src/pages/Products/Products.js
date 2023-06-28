@@ -1,9 +1,9 @@
 import './Products.css';
-import { useCart } from '../../context/CartContext';
+import { useShop } from '../../context/ShopContext';
 import ProductCard from '../../components/ProductCards/ProductCards';
 
 const Products = () => {
-  const { products, updateProdQuantity, addToCart } = useCart();
+  const { products, updateProdQuantity, addToCart } = useShop();
 
   return (
     <>

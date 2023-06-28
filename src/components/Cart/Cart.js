@@ -1,5 +1,5 @@
 import './Cart.css';
-import { useCart } from '../../context/CartContext';
+import { useShop } from '../../context/ShopContext';
 
 const Cart = () => {
   const {
@@ -8,7 +8,7 @@ const Cart = () => {
     totalCartCost,
     handleCartUpdate,
     toggleCartVisibility,
-  } = useCart();
+  } = useShop();
 
   return (
     <div>

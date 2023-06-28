@@ -1,0 +1,67 @@
+.active {
+  color: #fca5a5;
+}
+
+ul {
+  list-style: none;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9fafb;
+  padding: 20px;
+  border-bottom: 1px solid #111827;
+}
+
+.shop-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.right-nav {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-icons {
+  width: 30px;
+  height: 30px;
+  padding-bottom: 10px;
+}
+
+.cart-button {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  vertical-align: middle;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0 !important;
+}
+
+.cart-total {
+  position: absolute;
+  top: 50px;
+  right: 40px;
+  z-index: 1;
+  background-color: #fca5a5;
+  width: 32px;
+  height: 25px;
+  border-radius: 20px;
+  text-align: center;
+  padding: 7px 0px 0px 0px;
+}

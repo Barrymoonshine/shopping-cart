@@ -19,9 +19,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const toggleCartVisibility = () => {
-    console.log('toggleCartVisibility called');
     const cartVisibility = (state.isCartVisible = !state.isCartVisible);
-    console.log(`cartVisibility: ${cartVisibility}`);
     dispatch({
       type: ACTIONS.TOGGLE_CART_VISIBILITY,
       payload: { cartVisibility },
@@ -57,20 +55,44 @@ export const CartProvider = ({ children }) => {
     calcTotalCartItems(newCart);
   };
 
+  const updateCart = (id, productPrice, newQuantity) => {
+    const newCart = state.cart.map((product) => {
+      if (product.id === id) {
+        const cost = (newQuantity * parseFloat(productPrice)).toFixed(2);
+        return {
+          ...product,
+          quantity: newQuantity,
+          totalCost: cost,
+        };
+      }
+      return product;
+    });
+    dispatch({
+      type: ACTIONS.UPDATE_CART,
+      payload: { newCart },
+    });
+    calcTotalCartItems(newCart);
+    calcTotalCartCost(newCart);
+  };
+
+  const removeFromCart = (id) => {
+    const newCart = state.cart.filter((product) => product.id !== id);
+    dispatch({
+      type: ACTIONS.REMOVE_FROM_CART,
+      payload: { newCart },
+    });
+    calcTotalCartItems(newCart);
+    calcTotalCartCost(newCart);
+  };
+
   const getNewQuantity = (operand, quantity) =>
     operand === '+' ? quantity + 1 : quantity - 1;
 
   const handleCartUpdate = (operand, id, productPrice, quantity) => {
     const newQuantity = getNewQuantity(operand, quantity);
     newQuantity === 0
-      ? dispatch({
-          type: ACTIONS.REMOVE_FROM_CART,
-          payload: { id },
-        })
-      : dispatch({
-          type: ACTIONS.UPDATE_CART,
-          payload: { id, productPrice, newQuantity },
-        });
+      ? removeFromCart(id)
+      : updateCart(id, productPrice, newQuantity);
   };
 
   const value = {
@@ -81,8 +103,6 @@ export const CartProvider = ({ children }) => {
     addToCart,
     handleCartUpdate,
     toggleCartVisibility,
-    calcTotalCartCost,
-    calcTotalCartItems,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

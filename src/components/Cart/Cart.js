@@ -1,5 +1,4 @@
 import './Cart.css';
-import { useEffect } from 'react';
 import { useCart } from '../../context/CartContext';
 
 const Cart = () => {
@@ -8,15 +7,8 @@ const Cart = () => {
     isCartVisible,
     totalCartCost,
     handleCartUpdate,
-    calcTotalCartCost,
-    calcTotalCartItems,
     toggleCartVisibility,
   } = useCart();
-
-  useEffect(() => {
-    calcTotalCartCost(cart);
-    calcTotalCartItems(cart);
-  }, [cart, calcTotalCartCost, calcTotalCartItems]);
 
   return (
     <div>

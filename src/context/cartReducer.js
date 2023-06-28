@@ -16,27 +16,14 @@ const cartReducer = (state, action) => {
       };
 
     case ACTIONS.UPDATE_CART:
-      const updatedProd = state.cart.map((product) => {
-        if (product.id === action.payload.id) {
-          const cost = (
-            action.payload.newQuantity * parseFloat(action.payload.productPrice)
-          ).toFixed(2);
-          return {
-            ...product,
-            quantity: action.payload.newQuantity,
-            totalCost: cost,
-          };
-        }
-        return product;
-      });
       return {
         ...state,
-        cart: updatedProd,
+        cart: action.payload.newCart,
       };
     case ACTIONS.REMOVE_FROM_CART:
       return {
         ...state,
-        cart: state.cart.filter((product) => product.id !== action.payload.id),
+        cart: action.payload.newCart,
       };
     case ACTIONS.CALC_TOTAL_CART_ITEMS:
       return {

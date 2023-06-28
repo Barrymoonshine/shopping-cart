@@ -1,32 +1,34 @@
 import './Cart.css';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useCart } from '../../context/CartContext';
 
 const Cart = () => {
-  const [displayCart, setDisplayCart] = useState(true);
-  const [subTotal, setSubTotal] = useState(0);
-
-  const { cart, handleCartUpdate } = useCart();
-
-  const hideModal = () => {
-    setDisplayCart(false);
-  };
+  const {
+    cart,
+    isCartVisible,
+    totalCartCost,
+    handleCartUpdate,
+    calcTotalCartCost,
+    calcTotalCartItems,
+    toggleCartVisibility,
+  } = useCart();
 
   useEffect(() => {
-    const runningSubTotal = cart
-      .reduce((acc, curr) => acc + parseFloat(curr.totalCost), 0)
-      .toFixed(2);
-    setSubTotal(runningSubTotal);
-  }, [cart]);
+    calcTotalCartCost(cart);
+    calcTotalCartItems(cart);
+  }, [cart, calcTotalCartCost, calcTotalCartItems]);
 
   return (
     <div>
-      {displayCart && (
+      {isCartVisible && (
         <div className='cart-modal'>
           <div className='cart-content'>
             <div className='cart-first-line'>
               ITEMS IN YOUR CART
-              <button className='close-cart-button' onClick={hideModal}>
+              <button
+                className='close-cart-button'
+                onClick={toggleCartVisibility}
+              >
                 &#10005;
               </button>
             </div>
@@ -81,7 +83,7 @@ const Cart = () => {
             <div className='cart-bottom'>
               <div className='subtotal'>
                 <div>SUBTOTAL</div>
-                <div> £{subTotal}</div>
+                <div> £{totalCartCost}</div>
               </div>
               <button className='checkout-button'>CHECKOUT</button>
             </div>

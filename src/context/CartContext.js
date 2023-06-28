@@ -8,12 +8,34 @@ const CartContext = createContext(initialState);
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
+  const calcTotalCartCost = (newCart) => {
+    const newTotalCost = newCart
+      .reduce((acc, curr) => acc + parseFloat(curr.totalCost), 0)
+      .toFixed(2);
+    dispatch({
+      type: ACTIONS.CALC_TOTAL_CART_COST,
+      payload: { newTotalCost },
+    });
+  };
+
+  const toggleCartVisibility = () => {
+    console.log('toggleCartVisibility called');
+    const cartVisibility = (state.isCartVisible = !state.isCartVisible);
+    console.log(`cartVisibility: ${cartVisibility}`);
+    dispatch({
+      type: ACTIONS.TOGGLE_CART_VISIBILITY,
+      payload: { cartVisibility },
+    });
+  };
+
   const calcTotalCartItems = (newCart) => {
-    const newTotal = newCart.reduce((acc, curr) => acc + curr.quantity, false);
-    console.log('newTotal in context', newTotal);
+    const newTotalItems = newCart.reduce(
+      (acc, curr) => acc + curr.quantity,
+      false
+    );
     dispatch({
       type: ACTIONS.CALC_TOTAL_CART_ITEMS,
-      payload: { newTotal },
+      payload: { newTotalItems },
     });
   };
 
@@ -54,8 +76,13 @@ export const CartProvider = ({ children }) => {
   const value = {
     cart: state.cart,
     totalCartItems: state.totalCartItems,
+    totalCartCost: state.totalCartCost,
+    isCartVisible: state.isCartVisible,
     addToCart,
     handleCartUpdate,
+    toggleCartVisibility,
+    calcTotalCartCost,
+    calcTotalCartItems,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

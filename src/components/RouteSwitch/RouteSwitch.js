@@ -1,7 +1,6 @@
 import React from 'react';
 import './RouteSwitch.css';
 import { NavLink, Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
 import Home from '../Home/Home';
 import ProductsContainer from '../ProductsContainer/ProductsContainer';
 import Cart from '../Cart/Cart';
@@ -12,15 +11,9 @@ import cartIcon from '../../images/cart-icon.png';
 import { useCart } from '../../context/CartContext';
 
 const RouteSwitch = () => {
-  const [isCartVisible, setCartVisibility] = useState(false);
+  const { totalCartItems, toggleCartVisibility, isCartVisible } = useCart();
 
-  const toggleCartVisibility = () => {
-    setCartVisibility((prevState) => (prevState = !prevState));
-  };
-
-  const { totalCartItems } = useCart();
-
-  console.log('totalCartItems in RoutSwitch.js', totalCartItems);
+  console.log('isCartVisible in RouteSwitch', isCartVisible);
 
   return (
     <>
@@ -48,7 +41,10 @@ const RouteSwitch = () => {
             </li>
             <li>
               <div className='nav-links'>
-                <button className='cart-button' onClick={toggleCartVisibility}>
+                <button
+                  className='cart-button'
+                  onClick={() => toggleCartVisibility()}
+                >
                   <img className='nav-icons' src={cartIcon} alt='Cart' />
                   Cart
                 </button>

@@ -29,6 +29,7 @@ export const ShopProvider = ({ children }) => {
   };
 
   const calcTotalCartItems = (newCart) => {
+    console.log('calcTotalCartItems called');
     const newTotalItems = newCart.reduce(
       (acc, curr) => acc + curr.quantity,
       false
@@ -40,6 +41,16 @@ export const ShopProvider = ({ children }) => {
   };
 
   const addToCart = (productNameInput, quantityInput, priceInput, imgSrc) => {
+    console.log(
+      'productNameInput',
+      productNameInput,
+      'quantityInput',
+      quantityInput,
+      'priceInput',
+      priceInput,
+      'imgSrc',
+      imgSrc
+    );
     const cost = (quantityInput * parseFloat(priceInput)).toFixed(2);
     const newProduct = {
       productName: productNameInput,
@@ -55,6 +66,7 @@ export const ShopProvider = ({ children }) => {
       payload: { newCart },
     });
     calcTotalCartItems(newCart);
+    calcTotalCartCost(newCart);
   };
 
   const updateCart = (id, productPrice, newQuantity) => {

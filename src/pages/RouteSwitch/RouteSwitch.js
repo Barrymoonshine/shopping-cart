@@ -22,7 +22,7 @@ const RouteSwitch = () => {
         <nav>
           <ul className='right-nav'>
             <li>
-              <NavLink to='./'>
+              <NavLink to='./' style={{ textDecoration: 'none' }}>
                 <div className='nav-links'>
                   <img className='nav-icons' src={homeIcon} alt='Home' />
                   Home
@@ -30,7 +30,10 @@ const RouteSwitch = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to='./pages/Products/Products'>
+              <NavLink
+                to='./pages/Products/Products'
+                style={{ textDecoration: 'none' }}
+              >
                 <div className='nav-links'>
                   <img className='nav-icons' src={cheeseIcon} alt='Products' />
                   Products
@@ -43,7 +46,7 @@ const RouteSwitch = () => {
                   className='cart-button'
                   onClick={() => toggleCartVisibility()}
                 >
-                  <img className='nav-icons' src={cartIcon} alt='Cart' />
+                  <img className='cart-button-icon' src={cartIcon} alt='Cart' />
                   Cart
                 </button>
                 {totalCartItems && (

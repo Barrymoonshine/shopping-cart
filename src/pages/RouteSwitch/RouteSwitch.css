@@ -1,9 +1,13 @@
 .active {
-  color: #fca5a5;
+  color: #690404;
 }
 
 ul {
   list-style: none;
+}
+
+a {
+  color: #111827;
 }
 
 .header {
@@ -18,7 +22,7 @@ ul {
 
 .shop-title {
   font-family: 'Dancing Script', cursive;
-  font-size: 40px;
+  font-size: 50px;
   font-weight: bold;
 }
 
@@ -26,6 +30,9 @@ ul {
   display: flex;
   flex-direction: row;
   gap: 25px;
+  font-size: 20px;
+  font-weight: bold;
+  padding-right: 20px;
 }
 
 .nav-links {
@@ -35,9 +42,16 @@ ul {
 }
 
 .nav-icons {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   padding-bottom: 10px;
+}
+
+.cart-button-icon {
+  width: 35px;
+  height: 35px;
+  padding-bottom: 10px;
+  align-self: center;
 }
 
 .cart-button {
@@ -45,12 +59,14 @@ ul {
   border: none;
   display: flex;
   flex-direction: column;
-  vertical-align: middle;
+  align-self: center;
+  justify-content: center;
   font-size: 16px;
   font-family: 'Montserrat', sans-serif;
-  text-decoration: underline;
   cursor: pointer;
-  padding: 0 !important;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .cart-total {

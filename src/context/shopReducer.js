@@ -91,42 +91,43 @@ export const initialState = {
 };
 
 const shopReducer = (state, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
     case ACTIONS.ADD_TO_CART:
       return {
         ...state,
-        cart: action.payload.newCart,
+        cart: payload.newCart,
       };
 
     case ACTIONS.UPDATE_CART:
       return {
         ...state,
-        cart: action.payload.newCart,
+        cart: payload.newCart,
       };
     case ACTIONS.REMOVE_FROM_CART:
       return {
         ...state,
-        cart: action.payload.newCart,
+        cart: payload.newCart,
       };
     case ACTIONS.CALC_TOTAL_CART_ITEMS:
       return {
         ...state,
-        totalCartItems: action.payload.newTotalItems,
+        totalCartItems: payload.newTotalItems,
       };
     case ACTIONS.CALC_TOTAL_CART_COST:
       return {
         ...state,
-        totalCartCost: action.payload.newTotalCost,
+        totalCartCost: payload.newTotalCost,
       };
     case ACTIONS.TOGGLE_CART_VISIBILITY:
       return {
         ...state,
-        isCartVisible: action.payload.cartVisibility,
+        isCartVisible: payload.cartVisibility,
       };
     case ACTIONS.UPDATE_PROD_QUANTITY:
       return {
         ...state,
-        products: action.payload.newProdQuantity,
+        products: payload.newProdQuantity,
       };
     default:
       return state;

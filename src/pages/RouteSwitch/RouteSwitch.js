@@ -31,7 +31,7 @@ const RouteSwitch = () => {
             </li>
             <li>
               <NavLink
-                to='./pages/Products/Products'
+                to='./Products/Products'
                 style={{ textDecoration: 'none' }}
               >
                 <div className='nav-links'>
@@ -60,7 +60,7 @@ const RouteSwitch = () => {
       {isCartVisible && <Cart />}
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='pages/Products/Products' element={<Products />} />
+        <Route path='/Products/Products' element={<Products />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </>

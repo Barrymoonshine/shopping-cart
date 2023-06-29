@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/shopping-cart/static/css/main.b8615503.css",
+    "main.js": "/shopping-cart/static/js/main.9c768fd5.js",
+    "static/media/stilton.jpg": "/shopping-cart/static/media/stilton.2350744a2f418d8fba63.jpg",
+    "static/media/camembert.jpg": "/shopping-cart/static/media/camembert.6d1e26d80b96d0e90cac.jpg",
+    "static/media/morbier.jpg": "/shopping-cart/static/media/morbier.02fc376a02914462fcc6.jpg",
+    "static/media/taleggio.jpg": "/shopping-cart/static/media/taleggio.5ebaa6a9a193a0c9d23e.jpg",
+    "static/media/langres.jpg": "/shopping-cart/static/media/langres.dbed5bc69f2bbadf5de2.jpg",
+    "static/media/gorgonzola.jpg": "/shopping-cart/static/media/gorgonzola.ba02632d7fa4419d5438.jpg",
+    "static/media/stinking-bishop.jpg": "/shopping-cart/static/media/stinking-bishop.6fedc94751d2c60fa677.jpg",
+    "static/media/roquefort.jpg": "/shopping-cart/static/media/roquefort.8133a384cbfba498f0ce.jpg",
+    "static/media/cheese-making.gif": "/shopping-cart/static/media/cheese-making.eeab1b7bcbf9e90dc7b3.gif",
+    "static/media/parmesan.jpg": "/shopping-cart/static/media/parmesan.279a41a5fcbc324d1968.jpg",
+    "static/media/brie.jpg": "/shopping-cart/static/media/brie.bebf47f55e2891c61f84.jpg",
+    "index.html": "/shopping-cart/index.html",
+    "main.b8615503.css.map": "/shopping-cart/static/css/main.b8615503.css.map",
+    "main.9c768fd5.js.map": "/shopping-cart/static/js/main.9c768fd5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b8615503.css",
+    "static/js/main.9c768fd5.js"
+  ]
+}

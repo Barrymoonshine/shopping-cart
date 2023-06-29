@@ -39,7 +39,17 @@ export const ShopProvider = ({ children }) => {
     });
   };
 
-  const addToCart = (productNameInput, quantityInput, priceInput, imgSrc) => {
+  const updateTotalCartCalcs = (newCart) => {
+    calcTotalCartItems(newCart);
+    calcTotalCartCost(newCart);
+  };
+
+  const addNewProdToCart = (
+    productNameInput,
+    quantityInput,
+    priceInput,
+    imgSrc
+  ) => {
     const cost = (quantityInput * parseFloat(priceInput)).toFixed(2);
     const newProduct = {
       productName: productNameInput,
@@ -51,11 +61,34 @@ export const ShopProvider = ({ children }) => {
     };
     const newCart = [...state.cart, newProduct];
     dispatch({
-      type: ACTIONS.ADD_TO_CART,
+      type: ACTIONS.ADD_NEW_PROD_TO_CART,
       payload: { newCart },
     });
-    calcTotalCartItems(newCart);
-    calcTotalCartCost(newCart);
+    updateTotalCartCalcs(newCart);
+  };
+
+  const increaseCartQuantity = (
+    productNameInput,
+    quantityInput,
+    priceInput
+  ) => {
+    const newCart = state.cart.map((product) => {
+      if (product.productName === productNameInput) {
+        const newQuantity = product.quantity + quantityInput;
+        const newCost = (newQuantity * parseFloat(priceInput)).toFixed(2);
+        return {
+          ...product,
+          quantity: newQuantity,
+          totalCost: newCost,
+        };
+      }
+      return product;
+    });
+    dispatch({
+      type: ACTIONS.INCREASE_CART_QUANTITY,
+      payload: { newCart },
+    });
+    updateTotalCartCalcs(newCart);
   };
 
   const handleAddToCart = (
@@ -64,8 +97,14 @@ export const ShopProvider = ({ children }) => {
     priceInput,
     imgSrc
   ) => {
-    quantityInput !== 0 &&
-      addToCart(productNameInput, quantityInput, priceInput, imgSrc);
+    const isProdInCart = state.cart.some(
+      (product) => product.productName === productNameInput
+    );
+    if (quantityInput !== 0 && isProdInCart) {
+      increaseCartQuantity(productNameInput, quantityInput, priceInput);
+    } else if (quantityInput !== 0 && !isProdInCart) {
+      addNewProdToCart(productNameInput, quantityInput, priceInput, imgSrc);
+    }
   };
 
   const updateCart = (id, productPrice, newQuantity) => {
@@ -84,8 +123,7 @@ export const ShopProvider = ({ children }) => {
       type: ACTIONS.UPDATE_CART,
       payload: { newCart },
     });
-    calcTotalCartItems(newCart);
-    calcTotalCartCost(newCart);
+    updateTotalCartCalcs(newCart);
   };
 
   const removeFromCart = (id) => {
@@ -94,8 +132,7 @@ export const ShopProvider = ({ children }) => {
       type: ACTIONS.REMOVE_FROM_CART,
       payload: { newCart },
     });
-    calcTotalCartItems(newCart);
-    calcTotalCartCost(newCart);
+    updateTotalCartCalcs(newCart);
   };
 
   const handleCartUpdate = (operand, id, productPrice, quantity) => {

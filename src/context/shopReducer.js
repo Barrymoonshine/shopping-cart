@@ -93,12 +93,16 @@ export const initialState = {
 const shopReducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
-    case ACTIONS.ADD_TO_CART:
+    case ACTIONS.ADD_NEW_PROD_TO_CART:
       return {
         ...state,
         cart: payload.newCart,
       };
-
+    case ACTIONS.INCREASE_CART_QUANTITY:
+      return {
+        ...state,
+        cart: payload.newCart,
+      };
     case ACTIONS.UPDATE_CART:
       return {
         ...state,

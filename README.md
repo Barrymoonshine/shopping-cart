@@ -1,5 +1,7 @@
 # Shopping Cart
 
+![](https://github.com/Barrymoonshine/shopping-cart/blob/main/public/shopping-cart-demo.gif)
+
 [Live demo](https://barrymoonshine.github.io/shopping-cart/)
 
 ## Summary

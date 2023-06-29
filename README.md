@@ -1,6 +1,6 @@
 # Shopping Cart
 
-[Live demo](insert link )
+[Live demo](https://barrymoonshine.github.io/shopping-cart/)
 
 ## Summary
 

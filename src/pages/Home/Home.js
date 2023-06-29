@@ -13,7 +13,7 @@ const Home = () => {
             covered! Browse our selection of hand-crafted cheeses to find the
             cheese that’s right for you.
           </div>
-          <Link to='pages/Products/Products'>
+          <Link to='Products/Products'>
             <button className='explore-button'>Explore</button>
           </Link>
         </div>

@@ -1,6 +1,6 @@
 import './Cart.css';
 import { useShop } from '../../context/ShopContext';
-import helpers from '../../helpers/helpers';
+import Helpers from '../../helpers/Helpers';
 
 const Cart = () => {
   const {
@@ -14,7 +14,7 @@ const Cart = () => {
   } = useShop();
 
   const handleCartUpdate = (operand, id, productPrice, quantity) => {
-    const newQuantity = helpers.getNewQuantity(operand, quantity);
+    const newQuantity = Helpers.getNewQuantity(operand, quantity);
     if (newQuantity === 0) {
       const newCart = cart.filter((product) => product.id !== id);
       removeFromCart(newCart);

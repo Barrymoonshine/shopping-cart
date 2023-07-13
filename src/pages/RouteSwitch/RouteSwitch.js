@@ -49,7 +49,7 @@ const RouteSwitch = () => {
                   <img className='cart-button-icon' src={cartIcon} alt='Cart' />
                   Cart
                 </button>
-                {totalCartItems && (
+                {totalCartItems > 0 && (
                   <div className='cart-total'>{totalCartItems}</div>
                 )}
               </div>

@@ -1,4 +1,4 @@
-const helpers = (() => {
+const Helpers = (() => {
   const getNewQuantity = (operand, quantity) =>
     operand === '+' ? quantity + 1 : quantity - 1;
 
@@ -14,4 +14,4 @@ const helpers = (() => {
   };
 })();
 
-export default helpers;
+export default Helpers;

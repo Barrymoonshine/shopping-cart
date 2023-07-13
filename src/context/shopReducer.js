@@ -124,9 +124,10 @@ const shopReducer = (state, action) => {
         totalCartCost: payload.newTotalCost,
       };
     case ACTIONS.TOGGLE_CART_VISIBILITY:
+      const cartVisibility = state.isCartVisible ? false : true;
       return {
         ...state,
-        isCartVisible: payload.cartVisibility,
+        isCartVisible: cartVisibility,
       };
     case ACTIONS.UPDATE_PROD_QUANTITY:
       return {

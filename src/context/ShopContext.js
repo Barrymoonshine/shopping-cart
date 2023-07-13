@@ -20,14 +20,6 @@ export const ShopProvider = ({ children }) => {
     });
   };
 
-  const toggleCartVisibility = () => {
-    const cartVisibility = (state.isCartVisible = !state.isCartVisible);
-    dispatch({
-      type: ACTIONS.TOGGLE_CART_VISIBILITY,
-      payload: { cartVisibility },
-    });
-  };
-
   const calcTotalCartItems = (newCart) => {
     const newTotalItems = newCart.reduce(
       (acc, curr) => acc + curr.quantity,
@@ -164,7 +156,9 @@ export const ShopProvider = ({ children }) => {
     isCartVisible: state.isCartVisible,
     handleAddToCart,
     handleCartUpdate,
-    toggleCartVisibility,
+    toggleCartVisibility: () => {
+      dispatch({ type: ACTIONS.TOGGLE_CART_VISIBILITY });
+    },
     updateProdQuantity,
   };
 

@@ -22,11 +22,10 @@ const Cart = () => {
     } else {
       const newCart = cart.map((product) => {
         if (product.id === id) {
-          const cost = (newQuantity * parseFloat(productPrice)).toFixed(2);
           return {
             ...product,
             quantity: newQuantity,
-            totalCost: cost,
+            totalCost: (newQuantity * parseFloat(productPrice)).toFixed(2),
           };
         }
         return product;

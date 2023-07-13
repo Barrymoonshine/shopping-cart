@@ -25,12 +25,13 @@ const Products = () => {
     if (quantityInput !== 0 && isProdInCart) {
       const newCart = cart.map((product) => {
         if (product.productName === productNameInput) {
-          const newQuantity = product.quantity + quantityInput;
-          const newCost = (newQuantity * parseFloat(priceInput)).toFixed(2);
           return {
             ...product,
-            quantity: newQuantity,
-            totalCost: newCost,
+            quantity: product.quantity + quantityInput,
+            totalCost: (
+              (product.quantity + quantityInput) *
+              parseFloat(priceInput)
+            ).toFixed(2),
           };
         }
         return product;
@@ -38,15 +39,17 @@ const Products = () => {
       increaseCartQuantity(newCart);
       updateTotalCartCalcs(newCart);
     } else if (quantityInput !== 0 && !isProdInCart) {
-      const newProduct = {
-        productName: productNameInput,
-        quantity: quantityInput,
-        price: priceInput,
-        totalCost: (quantityInput * parseFloat(priceInput)).toFixed(2),
-        productImg: imgSrc,
-        id: uniqid(),
-      };
-      const newCart = [...cart, newProduct];
+      const newCart = [
+        ...cart,
+        {
+          productName: productNameInput,
+          quantity: quantityInput,
+          price: priceInput,
+          totalCost: (quantityInput * parseFloat(priceInput)).toFixed(2),
+          productImg: imgSrc,
+          id: uniqid(),
+        },
+      ];
       addNewProdToCart(newCart);
       updateTotalCartCalcs(newCart);
     }

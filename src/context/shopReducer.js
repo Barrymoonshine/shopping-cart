@@ -95,37 +95,14 @@ const shopReducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
     case ACTIONS.ADD_NEW_PROD_TO_CART:
-      const newProduct = {
-        productName: payload.productNameInput,
-        quantity: payload.quantityInput,
-        price: payload.priceInput,
-        totalCost: payload.cost,
-        productImg: payload.imgSrc,
-        id: uniqid(),
-      };
-      const newCart = [...state.cart, newProduct];
       return {
         ...state,
-        cart: newCart,
+        cart: payload.newCart,
       };
     case ACTIONS.INCREASE_CART_QUANTITY:
-      const newCartQuantity = state.cart.map((product) => {
-        if (product.productName === payload.productNameInput) {
-          const newQuantity = product.quantity + payload.quantityInput;
-          const newCost = (
-            newQuantity * parseFloat(payload.priceInput)
-          ).toFixed(2);
-          return {
-            ...product,
-            quantity: newQuantity,
-            totalCost: newCost,
-          };
-        }
-        return product;
-      });
       return {
         ...state,
-        cart: newCartQuantity,
+        cart: payload.newCart,
       };
     case ACTIONS.UPDATE_CART:
       return {
@@ -138,14 +115,21 @@ const shopReducer = (state, action) => {
         cart: payload.newCart,
       };
     case ACTIONS.CALC_TOTAL_CART_ITEMS:
+      const newTotalItems = payload.newCart.reduce(
+        (acc, curr) => acc + curr.quantity,
+        false
+      );
       return {
         ...state,
-        totalCartItems: payload.newTotalItems,
+        totalCartItems: newTotalItems,
       };
     case ACTIONS.CALC_TOTAL_CART_COST:
+      const newTotalCost = payload.newCart
+        .reduce((acc, curr) => acc + parseFloat(curr.totalCost), 0)
+        .toFixed(2);
       return {
         ...state,
-        totalCartCost: payload.newTotalCost,
+        totalCartCost: newTotalCost,
       };
     case ACTIONS.TOGGLE_CART_VISIBILITY:
       const cartVisibility = state.isCartVisible ? false : true;

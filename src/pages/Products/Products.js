@@ -1,14 +1,16 @@
 import './Products.css';
 import { useShop } from '../../context/ShopContext';
 import ProductCard from '../../components/ProductCards/ProductCards';
+import uniqid from 'uniqid';
 
 const Products = () => {
   const {
     products,
     updateProdQuantity,
-    cart,
     increaseCartQuantity,
     addNewProdToCart,
+    cart,
+    updateTotalCartCalcs,
   } = useShop();
 
   const handleAddToCart = (
@@ -21,9 +23,32 @@ const Products = () => {
       (product) => product.productName === productNameInput
     );
     if (quantityInput !== 0 && isProdInCart) {
-      increaseCartQuantity(productNameInput, quantityInput, priceInput);
+      const newCart = cart.map((product) => {
+        if (product.productName === productNameInput) {
+          const newQuantity = product.quantity + quantityInput;
+          const newCost = (newQuantity * parseFloat(priceInput)).toFixed(2);
+          return {
+            ...product,
+            quantity: newQuantity,
+            totalCost: newCost,
+          };
+        }
+        return product;
+      });
+      increaseCartQuantity(newCart);
+      updateTotalCartCalcs(newCart);
     } else if (quantityInput !== 0 && !isProdInCart) {
-      addNewProdToCart(productNameInput, quantityInput, priceInput, imgSrc);
+      const newProduct = {
+        productName: productNameInput,
+        quantity: quantityInput,
+        price: priceInput,
+        totalCost: (quantityInput * parseFloat(priceInput)).toFixed(2),
+        productImg: imgSrc,
+        id: uniqid(),
+      };
+      const newCart = [...cart, newProduct];
+      addNewProdToCart(newCart);
+      updateTotalCartCalcs(newCart);
     }
   };
 

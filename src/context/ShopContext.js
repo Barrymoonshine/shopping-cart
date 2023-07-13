@@ -1,7 +1,6 @@
 import { createContext, useReducer, useContext } from 'react';
 import shopReducer, { initialState } from './shopReducer';
 import ACTIONS from '../utils/ACTIONS';
-import uniqid from 'uniqid';
 import helpers from '../helpers/helpers.js';
 
 const ShopContext = createContext(initialState);
@@ -9,32 +8,6 @@ export const useShop = () => useContext(ShopContext);
 
 export const ShopProvider = ({ children }) => {
   const [state, dispatch] = useReducer(shopReducer, initialState);
-
-  const calcTotalCartCost = (newCart) => {
-    const newTotalCost = newCart
-      .reduce((acc, curr) => acc + parseFloat(curr.totalCost), 0)
-      .toFixed(2);
-    dispatch({
-      type: ACTIONS.CALC_TOTAL_CART_COST,
-      payload: { newTotalCost },
-    });
-  };
-
-  const calcTotalCartItems = (newCart) => {
-    const newTotalItems = newCart.reduce(
-      (acc, curr) => acc + curr.quantity,
-      false
-    );
-    dispatch({
-      type: ACTIONS.CALC_TOTAL_CART_ITEMS,
-      payload: { newTotalItems },
-    });
-  };
-
-  const updateTotalCartCalcs = (newCart) => {
-    calcTotalCartItems(newCart);
-    calcTotalCartCost(newCart);
-  };
 
   const updateCart = (id, productPrice, newQuantity) => {
     const newCart = state.cart.map((product) => {
@@ -52,7 +25,7 @@ export const ShopProvider = ({ children }) => {
       type: ACTIONS.UPDATE_CART,
       payload: { newCart },
     });
-    updateTotalCartCalcs(newCart);
+    // updateTotalCartCalcs(newCart);
   };
 
   const removeFromCart = (id) => {
@@ -61,7 +34,7 @@ export const ShopProvider = ({ children }) => {
       type: ACTIONS.REMOVE_FROM_CART,
       payload: { newCart },
     });
-    updateTotalCartCalcs(newCart);
+    // updateTotalCartCalcs(newCart);
   };
 
   const handleCartUpdate = (operand, id, productPrice, quantity) => {
@@ -77,16 +50,26 @@ export const ShopProvider = ({ children }) => {
     totalCartItems: state.totalCartItems,
     totalCartCost: state.totalCartCost,
     isCartVisible: state.isCartVisible,
-    addNewProdToCart: (productNameInput, quantityInput, priceInput, imgSrc) =>
+    addNewProdToCart: (newCart) =>
       dispatch({
         type: ACTIONS.ADD_NEW_PROD_TO_CART,
-        payload: { productNameInput, quantityInput, priceInput, imgSrc },
+        payload: { newCart },
       }),
-    increaseCartQuantity: (productNameInput, quantityInput, priceInput) =>
+    increaseCartQuantity: (newCart) =>
       dispatch({
         type: ACTIONS.INCREASE_CART_QUANTITY,
-        payload: { productNameInput, quantityInput, priceInput },
+        payload: { newCart },
       }),
+    updateTotalCartCalcs: (newCart) => {
+      dispatch({
+        type: ACTIONS.CALC_TOTAL_CART_COST,
+        payload: { newCart },
+      });
+      dispatch({
+        type: ACTIONS.CALC_TOTAL_CART_ITEMS,
+        payload: { newCart },
+      });
+    },
     handleCartUpdate,
     toggleCartVisibility: () => {
       dispatch({ type: ACTIONS.TOGGLE_CART_VISIBILITY });

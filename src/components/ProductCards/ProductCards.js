@@ -1,8 +1,13 @@
 import './ProductCards.css';
 
-const ProductCard = (props) => {
-  const { name, price, quantity, imgSrc, updateProdQuantity, handleAddToCart } =
-    props;
+const ProductCard = ({
+  name,
+  price,
+  quantity,
+  imgSrc,
+  updateProdQuantity,
+  handleAddToCart,
+}) => {
   return (
     <div className='product-card'>
       <div className='product-image'>

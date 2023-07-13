@@ -36,69 +36,6 @@ export const ShopProvider = ({ children }) => {
     calcTotalCartCost(newCart);
   };
 
-  const addNewProdToCart = (
-    productNameInput,
-    quantityInput,
-    priceInput,
-    imgSrc
-  ) => {
-    const cost = (quantityInput * parseFloat(priceInput)).toFixed(2);
-    const newProduct = {
-      productName: productNameInput,
-      quantity: quantityInput,
-      price: priceInput,
-      totalCost: cost,
-      productImg: imgSrc,
-      id: uniqid(),
-    };
-    const newCart = [...state.cart, newProduct];
-    dispatch({
-      type: ACTIONS.ADD_NEW_PROD_TO_CART,
-      payload: { newCart },
-    });
-    updateTotalCartCalcs(newCart);
-  };
-
-  const increaseCartQuantity = (
-    productNameInput,
-    quantityInput,
-    priceInput
-  ) => {
-    const newCart = state.cart.map((product) => {
-      if (product.productName === productNameInput) {
-        const newQuantity = product.quantity + quantityInput;
-        const newCost = (newQuantity * parseFloat(priceInput)).toFixed(2);
-        return {
-          ...product,
-          quantity: newQuantity,
-          totalCost: newCost,
-        };
-      }
-      return product;
-    });
-    dispatch({
-      type: ACTIONS.INCREASE_CART_QUANTITY,
-      payload: { newCart },
-    });
-    updateTotalCartCalcs(newCart);
-  };
-
-  const handleAddToCart = (
-    productNameInput,
-    quantityInput,
-    priceInput,
-    imgSrc
-  ) => {
-    const isProdInCart = state.cart.some(
-      (product) => product.productName === productNameInput
-    );
-    if (quantityInput !== 0 && isProdInCart) {
-      increaseCartQuantity(productNameInput, quantityInput, priceInput);
-    } else if (quantityInput !== 0 && !isProdInCart) {
-      addNewProdToCart(productNameInput, quantityInput, priceInput, imgSrc);
-    }
-  };
-
   const updateCart = (id, productPrice, newQuantity) => {
     const newCart = state.cart.map((product) => {
       if (product.id === id) {
@@ -140,7 +77,16 @@ export const ShopProvider = ({ children }) => {
     totalCartItems: state.totalCartItems,
     totalCartCost: state.totalCartCost,
     isCartVisible: state.isCartVisible,
-    handleAddToCart,
+    addNewProdToCart: (productNameInput, quantityInput, priceInput, imgSrc) =>
+      dispatch({
+        type: ACTIONS.ADD_NEW_PROD_TO_CART,
+        payload: { productNameInput, quantityInput, priceInput, imgSrc },
+      }),
+    increaseCartQuantity: (productNameInput, quantityInput, priceInput) =>
+      dispatch({
+        type: ACTIONS.INCREASE_CART_QUANTITY,
+        payload: { productNameInput, quantityInput, priceInput },
+      }),
     handleCartUpdate,
     toggleCartVisibility: () => {
       dispatch({ type: ACTIONS.TOGGLE_CART_VISIBILITY });

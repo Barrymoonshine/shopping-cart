@@ -95,9 +95,18 @@ const shopReducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
     case ACTIONS.ADD_NEW_PROD_TO_CART:
+      const newProduct = {
+        productName: payload.productNameInput,
+        quantity: payload.quantityInput,
+        price: payload.priceInput,
+        totalCost: payload.cost,
+        productImg: payload.imgSrc,
+        id: uniqid(),
+      };
+      const newCart = [...state.cart, newProduct];
       return {
         ...state,
-        cart: payload.newCart,
+        cart: newCart,
       };
     case ACTIONS.INCREASE_CART_QUANTITY:
       return {

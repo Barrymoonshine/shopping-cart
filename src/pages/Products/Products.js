@@ -3,7 +3,29 @@ import { useShop } from '../../context/ShopContext';
 import ProductCard from '../../components/ProductCards/ProductCards';
 
 const Products = () => {
-  const { products, updateProdQuantity, handleAddToCart } = useShop();
+  const {
+    products,
+    updateProdQuantity,
+    cart,
+    increaseCartQuantity,
+    addNewProdToCart,
+  } = useShop();
+
+  const handleAddToCart = (
+    productNameInput,
+    quantityInput,
+    priceInput,
+    imgSrc
+  ) => {
+    const isProdInCart = cart.some(
+      (product) => product.productName === productNameInput
+    );
+    if (quantityInput !== 0 && isProdInCart) {
+      increaseCartQuantity(productNameInput, quantityInput, priceInput);
+    } else if (quantityInput !== 0 && !isProdInCart) {
+      addNewProdToCart(productNameInput, quantityInput, priceInput, imgSrc);
+    }
+  };
 
   return (
     <>

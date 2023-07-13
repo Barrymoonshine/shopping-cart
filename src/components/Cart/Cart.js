@@ -1,14 +1,40 @@
 import './Cart.css';
 import { useShop } from '../../context/ShopContext';
+import helpers from '../../helpers/helpers';
 
 const Cart = () => {
   const {
     cart,
     isCartVisible,
     totalCartCost,
-    handleCartUpdate,
     toggleCartVisibility,
+    removeFromCart,
+    updateCart,
+    updateTotalCartCalcs,
   } = useShop();
+
+  const handleCartUpdate = (operand, id, productPrice, quantity) => {
+    const newQuantity = helpers.getNewQuantity(operand, quantity);
+    if (newQuantity === 0) {
+      const newCart = cart.filter((product) => product.id !== id);
+      removeFromCart(newCart);
+      updateTotalCartCalcs(newCart);
+    } else {
+      const newCart = cart.map((product) => {
+        if (product.id === id) {
+          const cost = (newQuantity * parseFloat(productPrice)).toFixed(2);
+          return {
+            ...product,
+            quantity: newQuantity,
+            totalCost: cost,
+          };
+        }
+        return product;
+      });
+      updateCart(newCart);
+      updateTotalCartCalcs(newCart);
+    }
+  };
 
   return (
     <div>

@@ -1,48 +1,12 @@
 import { createContext, useReducer, useContext } from 'react';
 import shopReducer, { initialState } from './shopReducer';
 import ACTIONS from '../utils/ACTIONS';
-import helpers from '../helpers/helpers.js';
 
 const ShopContext = createContext(initialState);
 export const useShop = () => useContext(ShopContext);
 
 export const ShopProvider = ({ children }) => {
   const [state, dispatch] = useReducer(shopReducer, initialState);
-
-  const updateCart = (id, productPrice, newQuantity) => {
-    const newCart = state.cart.map((product) => {
-      if (product.id === id) {
-        const cost = (newQuantity * parseFloat(productPrice)).toFixed(2);
-        return {
-          ...product,
-          quantity: newQuantity,
-          totalCost: cost,
-        };
-      }
-      return product;
-    });
-    dispatch({
-      type: ACTIONS.UPDATE_CART,
-      payload: { newCart },
-    });
-    // updateTotalCartCalcs(newCart);
-  };
-
-  const removeFromCart = (id) => {
-    const newCart = state.cart.filter((product) => product.id !== id);
-    dispatch({
-      type: ACTIONS.REMOVE_FROM_CART,
-      payload: { newCart },
-    });
-    // updateTotalCartCalcs(newCart);
-  };
-
-  const handleCartUpdate = (operand, id, productPrice, quantity) => {
-    const newQuantity = helpers.getNewQuantity(operand, quantity);
-    newQuantity === 0
-      ? removeFromCart(id)
-      : updateCart(id, productPrice, newQuantity);
-  };
 
   const value = {
     products: state.products,
@@ -70,7 +34,16 @@ export const ShopProvider = ({ children }) => {
         payload: { newCart },
       });
     },
-    handleCartUpdate,
+    removeFromCart: (newCart) =>
+      dispatch({
+        type: ACTIONS.REMOVE_FROM_CART,
+        payload: { newCart },
+      }),
+    updateCart: (newCart) =>
+      dispatch({
+        type: ACTIONS.UPDATE_CART,
+        payload: { newCart },
+      }),
     toggleCartVisibility: () => {
       dispatch({ type: ACTIONS.TOGGLE_CART_VISIBILITY });
     },

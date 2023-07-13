@@ -66,20 +66,6 @@ const Cart = () => {
                       className='quantity-buttons'
                       onClick={() =>
                         handleCartUpdate(
-                          '+',
-                          product.id,
-                          product.price,
-                          product.quantity
-                        )
-                      }
-                    >
-                      +
-                    </button>
-                    {product.quantity}
-                    <button
-                      className='quantity-buttons'
-                      onClick={() =>
-                        handleCartUpdate(
                           '-',
                           product.id,
                           product.price,
@@ -88,6 +74,20 @@ const Cart = () => {
                       }
                     >
                       -
+                    </button>
+                    {product.quantity}
+                    <button
+                      className='quantity-buttons'
+                      onClick={() =>
+                        handleCartUpdate(
+                          '+',
+                          product.id,
+                          product.price,
+                          product.quantity
+                        )
+                      }
+                    >
+                      +
                     </button>
                   </div>
                   <div className='product-price'>£{product.price}</div>

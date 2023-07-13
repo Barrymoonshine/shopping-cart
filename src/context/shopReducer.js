@@ -10,6 +10,7 @@ import stiltonImg from '../images/stilton.jpg';
 import stinkingBishopImg from '../images/stinking-bishop.jpg';
 import taleggioImg from '../images/taleggio.jpg';
 import morbierImg from '../images/morbier.jpg';
+import helpers from '../helpers/helpers.js';
 
 export const initialState = {
   products: [
@@ -130,9 +131,19 @@ const shopReducer = (state, action) => {
         isCartVisible: cartVisibility,
       };
     case ACTIONS.UPDATE_PROD_QUANTITY:
+      const newProdQuantity = state.products.map((product) => {
+        if (product.productName === payload.productName) {
+          const newQuantity = helpers.getNewValue(
+            payload.operand,
+            product.quantity
+          );
+          return { ...product, quantity: newQuantity };
+        }
+        return product;
+      });
       return {
         ...state,
-        products: payload.newProdQuantity,
+        products: newProdQuantity,
       };
     default:
       return state;

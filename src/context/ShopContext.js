@@ -134,20 +134,6 @@ export const ShopProvider = ({ children }) => {
       : updateCart(id, productPrice, newQuantity);
   };
 
-  const updateProdQuantity = (operand, productName) => {
-    const newProdQuantity = state.products.map((product) => {
-      if (product.productName === productName) {
-        const newQuantity = helpers.getNewValue(operand, product.quantity);
-        return { ...product, quantity: newQuantity };
-      }
-      return product;
-    });
-    dispatch({
-      type: ACTIONS.UPDATE_PROD_QUANTITY,
-      payload: { newProdQuantity },
-    });
-  };
-
   const value = {
     products: state.products,
     cart: state.cart,
@@ -159,7 +145,12 @@ export const ShopProvider = ({ children }) => {
     toggleCartVisibility: () => {
       dispatch({ type: ACTIONS.TOGGLE_CART_VISIBILITY });
     },
-    updateProdQuantity,
+    updateProdQuantity: (operand, productName) => {
+      dispatch({
+        type: ACTIONS.UPDATE_PROD_QUANTITY,
+        payload: { operand, productName },
+      });
+    },
   };
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;

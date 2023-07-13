@@ -109,9 +109,23 @@ const shopReducer = (state, action) => {
         cart: newCart,
       };
     case ACTIONS.INCREASE_CART_QUANTITY:
+      const newCartQuantity = state.cart.map((product) => {
+        if (product.productName === payload.productNameInput) {
+          const newQuantity = product.quantity + payload.quantityInput;
+          const newCost = (
+            newQuantity * parseFloat(payload.priceInput)
+          ).toFixed(2);
+          return {
+            ...product,
+            quantity: newQuantity,
+            totalCost: newCost,
+          };
+        }
+        return product;
+      });
       return {
         ...state,
-        cart: payload.newCart,
+        cart: newCartQuantity,
       };
     case ACTIONS.UPDATE_CART:
       return {

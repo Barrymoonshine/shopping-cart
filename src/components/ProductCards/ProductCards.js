@@ -5,8 +5,8 @@ const ProductCard = ({
   price,
   quantity,
   imgSrc,
-  updateProdQuantity,
-  handleAddToCart,
+  // updateProdQuantity, functions to come from new TBC hook
+  // handleAddToCart,
 }) => {
   return (
     <div className='product-card'>
@@ -21,27 +21,27 @@ const ProductCard = ({
         <div className='quantity-container'>
           <button
             className='quantity-buttons'
-            onClick={() => {
-              updateProdQuantity('-', name);
-            }}
+            // onClick={() => {
+            //   updateProdQuantity('-', name);
+            // }}
           >
             -
           </button>
           <div className='product-quantity'>{quantity}</div>
           <button
             className='quantity-buttons'
-            onClick={() => {
-              updateProdQuantity('+', name);
-            }}
+            // onClick={() => {
+            //   updateProdQuantity('+', name);
+            // }}
           >
             +
           </button>
         </div>
         <button
           className='add-to-cart-button'
-          onClick={() => {
-            handleAddToCart(name, quantity, price, imgSrc);
-          }}
+          // onClick={() => {
+          //   handleAddToCart(name, quantity, price, imgSrc);
+          // }}
         >
           Add to cart
         </button>

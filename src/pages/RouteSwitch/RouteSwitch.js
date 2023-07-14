@@ -1,7 +1,7 @@
 import './RouteSwitch.css';
 import React from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
-import { useShop } from '../../context/ShopContext';
+import useShopState from '../../hooks/useShopState';
 import Home from '..//Home/Home';
 import Products from '../Products/Products';
 import Cart from '../../components/Cart/Cart';
@@ -11,7 +11,10 @@ import cheeseIcon from '../../images/cheese-icon.png';
 import cartIcon from '../../images/cart-icon.png';
 
 const RouteSwitch = () => {
-  const { totalCartItems, toggleCartVisibility, isCartVisible } = useShop();
+  // Full list of methods and variables previously available via useShop
+  // const { totalCartItems, toggleCartVisibility, isCartVisible } = useShop();
+
+  const { totalCartItems, isCartVisible } = useShopState();
 
   return (
     <>
@@ -44,7 +47,7 @@ const RouteSwitch = () => {
               <div className='nav-links'>
                 <button
                   className='cart-button'
-                  onClick={() => toggleCartVisibility()}
+                  // onClick={() => toggleCartVisibility()}
                 >
                   <img className='cart-button-icon' src={cartIcon} alt='Cart' />
                   Cart

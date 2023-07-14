@@ -1,39 +1,43 @@
 import './Cart.css';
-import { useShop } from '../../context/ShopContext';
-import Helpers from '../../helpers/Helpers';
+import useShopState from '../../hooks/useShopState';
+// import Helpers from '../../helpers/Helpers';
 
 const Cart = () => {
-  const {
-    cart,
-    isCartVisible,
-    totalCartCost,
-    toggleCartVisibility,
-    removeFromCart,
-    updateCart,
-    updateTotalCartCalcs,
-  } = useShop();
+  // Full list of methods and variables previously available via useShop
+  // const {
+  //   cart,
+  //   isCartVisible,
+  //   totalCartCost,
+  //   toggleCartVisibility,
+  //   removeFromCart,
+  //   updateCart,
+  //   updateTotalCartCalcs,
+  // } = useShop();
 
-  const handleCartUpdate = (operand, id, productPrice, quantity) => {
-    const newQuantity = Helpers.getNewQuantity(operand, quantity);
-    if (newQuantity === 0) {
-      const newCart = cart.filter((product) => product.id !== id);
-      removeFromCart(newCart);
-      updateTotalCartCalcs(newCart);
-    } else {
-      const newCart = cart.map((product) => {
-        if (product.id === id) {
-          return {
-            ...product,
-            quantity: newQuantity,
-            totalCost: (newQuantity * parseFloat(productPrice)).toFixed(2),
-          };
-        }
-        return product;
-      });
-      updateCart(newCart);
-      updateTotalCartCalcs(newCart);
-    }
-  };
+  const { cart, isCartVisible, totalCartCost } = useShopState;
+
+  // Function to move to new TBC custom hook
+  // const handleCartUpdate = (operand, id, productPrice, quantity) => {
+  //   const newQuantity = Helpers.getNewQuantity(operand, quantity);
+  //   if (newQuantity === 0) {
+  //     const newCart = cart.filter((product) => product.id !== id);
+  //     removeFromCart(newCart);
+  //     updateTotalCartCalcs(newCart);
+  //   } else {
+  //     const newCart = cart.map((product) => {
+  //       if (product.id === id) {
+  //         return {
+  //           ...product,
+  //           quantity: newQuantity,
+  //           totalCost: (newQuantity * parseFloat(productPrice)).toFixed(2),
+  //         };
+  //       }
+  //       return product;
+  //     });
+  //     updateCart(newCart);
+  //     updateTotalCartCalcs(newCart);
+  //   }
+  // };
 
   return (
     <div>
@@ -44,7 +48,7 @@ const Cart = () => {
               ITEMS IN YOUR CART
               <button
                 className='close-cart-button'
-                onClick={toggleCartVisibility}
+                // onClick={toggleCartVisibility}
               >
                 &#10005;
               </button>
@@ -64,28 +68,28 @@ const Cart = () => {
                   <div className='product-quantity-container'>
                     <button
                       className='quantity-buttons'
-                      onClick={() =>
-                        handleCartUpdate(
-                          '-',
-                          product.id,
-                          product.price,
-                          product.quantity
-                        )
-                      }
+                      // onClick={() =>
+                      //   handleCartUpdate(
+                      //     '-',
+                      //     product.id,
+                      //     product.price,
+                      //     product.quantity
+                      //   )
+                      // }
                     >
                       -
                     </button>
                     {product.quantity}
                     <button
                       className='quantity-buttons'
-                      onClick={() =>
-                        handleCartUpdate(
-                          '+',
-                          product.id,
-                          product.price,
-                          product.quantity
-                        )
-                      }
+                      // onClick={() =>
+                      //   handleCartUpdate(
+                      //     '+',
+                      //     product.id,
+                      //     product.price,
+                      //     product.quantity
+                      //   )
+                      // }
                     >
                       +
                     </button>
